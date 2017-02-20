@@ -1,4 +1,4 @@
-package valueobjects;
+package logica.valueobjects;
 
 public class VOBusSalida {
 
