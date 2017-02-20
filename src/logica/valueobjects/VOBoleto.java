@@ -1,5 +1,5 @@
 package logica.valueobjects;
 
-public class VOBoleto {
+public abstract class VOBoleto {
 
 }

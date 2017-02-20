@@ -1,5 +1,5 @@
 package logica.valueobjects;
 
-public class VOExcursionSalida {
+public class VOExcursionSalida extends VOExcursion{
 
 }

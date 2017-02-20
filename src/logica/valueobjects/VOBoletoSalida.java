@@ -1,5 +1,5 @@
 package logica.valueobjects;
 
-public class VOBoletoSalida {
+public class VOBoletoSalida extends VOBoleto{
 
 }
