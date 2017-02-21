@@ -1,4 +1,5 @@
-package logica;
+
+package logica.negocio;
 
 public class Boleto {
 
