@@ -3,6 +3,8 @@ package logica.negocio;
 
 import java.math.BigDecimal;
 
+import logica.valueobjects.VOBoletoSalida;
+
 public class Boleto {
 
     private int numero;
@@ -40,5 +42,9 @@ public class Boleto {
         BigDecimal precioFinal = edad > 12 ? precioBase : precioBase.multiply(BigDecimal.valueOf(0.80));
 
         return precioFinal;
+    }
+    
+    public VOBoletoSalida voSalida() {
+    	return new VOBoletoSalida(numero, edad, procedencia, celular);
     }
 }

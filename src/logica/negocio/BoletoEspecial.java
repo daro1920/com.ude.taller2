@@ -2,6 +2,9 @@ package logica.negocio;
 
 import java.math.BigDecimal;
 
+import logica.valueobjects.VOBoletoEspecialSalida;
+import logica.valueobjects.VOBoletoSalida;
+
 public class BoletoEspecial extends Boleto {
 
     private BigDecimal descuento;
@@ -17,9 +20,15 @@ public class BoletoEspecial extends Boleto {
         return descuento;
     }
 
+    @Override
     public BigDecimal getPrecioFinal(BigDecimal precioBase) {
 
         return super.getPrecioFinal(precioBase).subtract(descuento);
         
+    }
+    
+    @Override
+    public VOBoletoSalida voSalida() {
+    	return new VOBoletoEspecialSalida(getNumero(), getEdad(), getProcedencia(), getCelular(), descuento);
     }
 }

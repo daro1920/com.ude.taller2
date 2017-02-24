@@ -61,8 +61,8 @@ public class Excursion {
 		this.bus = bus;
 	}
 	
-	public List<VOBoletoSalida>listarBoletos() {
-		return boletos.listarBoletos();
+	public List<VOBoletoSalida>listarBoletos(TipoBoleto tipo) {
+		return boletos.listarBoletos(tipo);
 	}
 
 	public int cantidadAsientosDisponibles() {
@@ -73,8 +73,8 @@ public class Excursion {
 		return cantidadAsientosDisponibles() > 0;
 	}
 	
-	public BigDecimal getRecaudacion() {
-		return boletos.getRecaudacion(precioBase);
+	public BigDecimal recaudacion() {
+		return boletos.recaudacion(precioBase);
 	}
 	
 	public boolean colisionaCon(Excursion otraExcursion) {

@@ -1,10 +1,10 @@
 package logica.negocio;
 
-import logica.valueobjects.VOBoleto;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import logica.valueobjects.VOBoletoSalida;
 
 public class Boletos {
 
@@ -35,13 +35,39 @@ public class Boletos {
     }
 
 
-    public VOBoleto listarBoletos(){
-        //TODO falta implementacion
-        return null;
+    public List<VOBoletoSalida> listarBoletos(TipoBoleto tipo){
+        
+    	List<VOBoletoSalida> boletosSalida = new ArrayList<VOBoletoSalida>();
+    	
+    	for (Boleto boleto : boletos) {
+    		if (boletoDeTipo(boleto, tipo)) {
+        		boletosSalida.add(boleto.voSalida());
+    		}
+    	}
+    	
+        return boletosSalida;
     }
 
-    public BigDecimal getRecaudacion(BigDecimal pre){
-        //TODO falta implementac9oion
-        return null;
+    private boolean boletoDeTipo(Boleto boleto, TipoBoleto tipo) {
+    	boolean esDeTipo = false;
+    	
+    	if (tipo.equals(TipoBoleto.COMUN)) {
+    		esDeTipo = boleto instanceof Boleto;
+    	} else if (tipo.equals(TipoBoleto.ESPECIAL)) {
+    		esDeTipo = boleto instanceof BoletoEspecial;
+    	}
+    	
+		return esDeTipo;
+	}
+
+	public BigDecimal recaudacion(BigDecimal precioBase){
+        
+    	BigDecimal recaudacion = BigDecimal.ZERO;
+    	
+    	for (Boleto boleto : boletos) {
+    		recaudacion.add(boleto.getPrecioFinal(precioBase));
+    	}
+    	
+        return recaudacion;
     }
 }
