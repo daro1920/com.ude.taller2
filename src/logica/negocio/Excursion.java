@@ -105,7 +105,7 @@ public class Excursion {
 					voBoleto.getProcedencia(), voBoleto.getCelular());
 		}
 		
-		boletos.insBack(boleto);
+		boletos.agregar(boleto);
 		
 		proximoNroBoleto ++;
 	}

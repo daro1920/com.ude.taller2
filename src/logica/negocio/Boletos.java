@@ -1,14 +1,11 @@
 package logica.negocio;
 
-import valueobjects.VOBoleto;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Boletos {
 
-    private List<Boleto> boletos =  new ArrayList<Boleto>();
+    private List<Boleto> boletos =  new ArrayList();
 
     public void insBack(Boleto boleto){
         boletos.add(boleto);
@@ -34,14 +31,4 @@ public class Boletos {
         return boletos.get(index);
     }
 
-
-    public VOBoleto listarBoletos(){
-        //TODO falta implementacion
-        return null;
-    }
-
-    public BigDecimal getRecaudacion(BigDecimal pre){
-        //TODO falta implementac9oion
-        return null;
-    }
 }
