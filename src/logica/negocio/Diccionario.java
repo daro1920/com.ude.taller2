@@ -28,7 +28,11 @@ public abstract class Diccionario<K, V> {
 		return mapa.containsKey(clave);
 	}
 	
-	public Iterator<V> iterador() {
+	protected Iterator<V> iterador() {
 		return mapa.values().iterator();
+	}
+	
+	public int tamanio() {
+		return mapa.size();
 	}
 }

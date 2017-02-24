@@ -1,8 +1,8 @@
 package logica.negocio;
-import logica.valueobjects.*;
 
-import java.io.*;
-import java.awt.*;
+import java.util.List;
+
+import logica.valueobjects.VOExcursionSalida;
 
 public class Bus {
 	
@@ -29,17 +29,16 @@ public int getCapacidad(){
 	return capacidad;
 }
 public int getCantidadExcursiones(){
-	return excursionesAsignadas.lenght();
+	return excursionesAsignadas.tamanio();
 }
 public List<VOExcursionSalida> listarExcursionesAsignadas(){
 	return excursionesAsignadas.listarExcursiones();
 }
 public void agregarExcursion(Excursion excursion){
-	return excursionesAsignadas.agregarExcrusion();
+	excursionesAsignadas.agregar(excursion);
 }
-public void borrarExcursion(String matricula){
-	Excursion auxiliar = Excursiones.obtenerExcursion(matricula);
-	excursionesAsignadas.delete(auxiliar);
+public void borrarExcursion(String codigo){
+	excursionesAsignadas.quitar(codigo);
 }
 
 

@@ -18,18 +18,32 @@ public class Excursiones extends Diccionario<String, Excursion>{
 		this.poner(excursion.getCodigo(), excursion);
 	}
 	
+	public List<VOExcursionSalida> listarExcursiones() {
+		
+		Excursion excursion;
+		Iterator<Excursion> iteradorExcursiones = this.iterador();
+		List<VOExcursionSalida> excursionesSalida = new ArrayList<VOExcursionSalida>();
+		
+		while (iteradorExcursiones.hasNext()) {
+			excursion = iteradorExcursiones.next();
+			excursionesSalida.add(excursion.voSalida());
+		}
+		
+		Collections.sort(excursionesSalida);
+		
+		return excursionesSalida;
+	}
+	
 	public List<VOExcursionSalida> listarExcursionesHacia(String destino) {
 		
 		Excursion excursion;
-		VOExcursionSalida excursionSalida;
 		Iterator<Excursion> iteradorExcursiones = this.iterador();
 		List<VOExcursionSalida> excursionesSalida = new ArrayList<VOExcursionSalida>();
 		
 		while (iteradorExcursiones.hasNext()) {
 			excursion = iteradorExcursiones.next();
 			if (excursion.vaHacia(destino)) {
-				excursionSalida = convertirEnExcursionSalida(excursion);
-				excursionesSalida.add(excursionSalida);
+				excursionesSalida.add(excursion.voSalida());
 			}
 		}
 		
@@ -41,15 +55,13 @@ public class Excursiones extends Diccionario<String, Excursion>{
 	public List<VOExcursionSalida> listarExcursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) {
 		
 		Excursion excursion;
-		VOExcursionSalida excursionSalida;
 		Iterator<Excursion> iteradorExcursiones = this.iterador();
 		List<VOExcursionSalida> excursionesSalida = new ArrayList<VOExcursionSalida>();
 		
 		while (iteradorExcursiones.hasNext()) {
 			excursion = iteradorExcursiones.next();
 			if (excursion.precioEntre(precioMin, precioMax)) {
-				excursionSalida = convertirEnExcursionSalida(excursion);
-				excursionesSalida.add(excursionSalida);
+				excursionesSalida.add(excursion.voSalida());
 			}
 		}
 		
@@ -57,15 +69,22 @@ public class Excursiones extends Diccionario<String, Excursion>{
 		
 		return excursionesSalida;
 	}
-
-	private VOExcursionSalida convertirEnExcursionSalida(Excursion excursion) {
-		
-		VOExcursionSalida excursionSalida = new VOExcursionSalida(excursion.getCodigo(),
-				excursion.getDestino(), excursion.getFechaHoraPartida(),
-				excursion.getFechaHoraRegreso(), excursion.getPrecioBase(),
-				excursion.cantidadAsientosDisponibles());
-		
-		return excursionSalida;
-	}
 	
+	public List<VOExcursionSalida> listarExcursionesDeBus(String matricula) {
+		
+		Excursion excursion;
+		Iterator<Excursion> iteradorExcursiones = this.iterador();
+		List<VOExcursionSalida> excursionesSalida = new ArrayList<VOExcursionSalida>();
+		
+		while (iteradorExcursiones.hasNext()) {
+			excursion = iteradorExcursiones.next();
+			if (excursion.esDeBus(matricula)) {
+				excursionesSalida.add(excursion.voSalida());
+			}
+		}
+		
+		Collections.sort(excursionesSalida);
+		
+		return excursionesSalida;
+	}
 }

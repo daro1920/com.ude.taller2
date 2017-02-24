@@ -2,12 +2,12 @@ package logica.negocio;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import logica.valueobjects.VOBoletoEntrada;
 import logica.valueobjects.VOBoletoEspecialEntrada;
 import logica.valueobjects.VOBoletoSalida;
+import logica.valueobjects.VOExcursionSalida;
 
 public class Excursion {
 	
@@ -112,6 +112,15 @@ public class Excursion {
 	
 	private boolean esBoletoEspecial(VOBoletoEntrada boleto) {
 		return boleto instanceof VOBoletoEspecialEntrada; 
+	}
+	
+	public VOExcursionSalida voSalida() {
+		return new VOExcursionSalida(codigo, destino, fechaHoraPartida, fechaHoraRegreso,
+				precioBase, cantidadAsientosDisponibles());
+	}
+	
+	public boolean esDeBus(String matricula) {
+		return bus.getMatricula().equals(matricula);
 	}
 	
 }
