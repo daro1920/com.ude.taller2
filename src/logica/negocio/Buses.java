@@ -1,44 +1,55 @@
 package logica.negocio;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.Map;
 import java.util.Date;
+import java.util.List;
+
+import logica.valueobjects.VOBusSalida;
 
 
-public class Buses {
+public class Buses extends Diccionario<String, Bus> {
 	
-private  Map<String,Bus> buses = new TreeMap<>();
+	public Buses() {
+		super();
+	}
 
-public void agregarBus(Bus bus){
-	buses.put(bus.matricula, bus);
-}
+	public void agregar(Bus bus) {
+		poner(bus.getMatricula(), bus);
+	}
 
-public Bus obtenerBusDisponible(Date fechaHoraPartida, Date fechaHoraRegreso){
-	
-	Bus auxiliar = buses.info;
-	for(int i=0;i<auxiliar.excursionesAsignadas.lenght();i++){
-		exAuxiliar = auxiliar.excursionesAsignadas[i];
-		if(exAuxiliar.fechaHoraPartida > fechaHoraRegreso || exAuxiliar.fechaHoraRegreso < fechaHoraPardida)
-			return auxiliar;
-		else
-			return obtenerBusDisponible( fechaHoraPartida, fechaHoraRegreso);
+	public Bus obtenerBusDisponible(Date fechaHoraPartida, Date fechaHoraRegreso){
+		/*
+		Bus auxiliar = buses.info;
+		for(int i=0;i<auxiliar.excursionesAsignadas.lenght();i++){
+			exAuxiliar = auxiliar.excursionesAsignadas[i];
+			if(exAuxiliar.fechaHoraPartida > fechaHoraRegreso || exAuxiliar.fechaHoraRegreso < fechaHoraPardida)
+				return auxiliar;
+			else
+				return obtenerBusDisponible( fechaHoraPartida, fechaHoraRegreso);
+		}*/
+		throw new UnsupportedOperationException("Metodo no implementado, aun");
+		
 	}
 	
-}
-public boolean hayBusDisponible(Date fechaHoraPartida, Date fechaHoraRegreso){
-	boolean hayBus= false;
-	Bus auxiliar = buses.info;
-	for(int i=0;i<auxiliar.excursionesAsignadas.lenght();i++){
-		exAuxiliar = auxiliar.excursionesAsignadas[i];
-		if(exAuxiliar.fechaHoraPartida > fechaHoraRegreso || exAuxiliar.fechaHoraRegreso < fechaHoraPardida)
-			hayBus =  true;
-		else
-			return hayBusDisponible( fechaHoraPartida, fechaHoraRegreso);
-	}	
+	public Bus obtenerOtroBusDisponible(Excursion excursion) {
+		// TODO: Devolver el primer bus que, ademas de estar disponible, tenga
+		// capacidad suficiente para la excursion y sea diferente del bus que ya tiene asignado.
+		throw new UnsupportedOperationException("Metodo no implementado, aun");
+	}
 	
-}
-
+	public boolean hayBusDisponible(Date fechaHoraPartida, Date fechaHoraRegreso){
+		/*boolean hayBus= false;
+		Bus auxiliar = buses.info;
+		for(int i=0;i<auxiliar.excursionesAsignadas.lenght();i++){
+			exAuxiliar = auxiliar.excursionesAsignadas[i];
+			if(exAuxiliar.fechaHoraPartida > fechaHoraRegreso || exAuxiliar.fechaHoraRegreso < fechaHoraPardida)
+				hayBus =  true;
+			else
+				return hayBusDisponible( fechaHoraPartida, fechaHoraRegreso);
+		}*/
+		throw new UnsupportedOperationException("Metodo no implementado, aun");
+	}
+	
+	public List<VOBusSalida> listarBuses() {
+		throw new UnsupportedOperationException("Metodo no implementado, aun");
+	}
 
 }

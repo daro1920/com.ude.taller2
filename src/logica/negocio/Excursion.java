@@ -1,12 +1,13 @@
 package logica.negocio;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import logica.valueobjects.VOBoletoEntrada;
 import logica.valueobjects.VOBoletoEspecialEntrada;
 import logica.valueobjects.VOBoletoSalida;
+import logica.valueobjects.VOExcursionEntrada;
 import logica.valueobjects.VOExcursionSalida;
 
 public class Excursion {
@@ -31,6 +32,11 @@ public class Excursion {
 		
 		this.boletos = new Boletos();
 		this.proximoNroBoleto = 1;
+	}
+	
+	public Excursion(VOExcursionEntrada voExcursion, Bus bus) {
+		this(voExcursion.getCodigo(), voExcursion.getDestino(), voExcursion.getFechaHoraPartida(),
+				voExcursion.getFechaHoraRegreso(), voExcursion.getPrecioBase(), bus);
 	}
 
 	public String getCodigo() {

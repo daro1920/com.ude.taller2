@@ -1,8 +1,21 @@
 package logica.negocio;
 
-import persistencia.Persistencia;
+import java.math.BigDecimal;
+import java.util.List;
+
+import logica.excepciones.BusInexistenteException;
+import logica.excepciones.NoExisteExcursionException;
+import logica.excepciones.NoHayAsientosDisponiblesException;
+import logica.excepciones.NoHayBusesDisponiblesException;
 import logica.excepciones.PersistenciaException;
+import logica.excepciones.YaExisteExcursionException;
+import logica.valueobjects.VOBoletoEntrada;
+import logica.valueobjects.VOBoletoSalida;
+import logica.valueobjects.VOBusSalida;
+import logica.valueobjects.VOExcursionEntrada;
+import logica.valueobjects.VOExcursionSalida;
 import logica.valueobjects.VOFachadaPersistencia;
+import persistencia.Persistencia;
 
 public class Fachada {
 
@@ -14,6 +27,85 @@ public class Fachada {
 		buses = new Buses();
 		excursiones = new Excursiones();
 		monitor = new Monitor();
+	}
+	
+//	+ registrarBus(VOBusEntrada. TipoError &) : void
+	
+	public List<VOBusSalida> listarBuses() {
+		monitor.comienzoLectura();
+		
+		List<VOBusSalida> busesSalida = buses.listarBuses();
+		
+		monitor.terminoLectura();
+		
+		return busesSalida;
+	}
+
+	public List<VOExcursionSalida> listarExcursionesBus(String matricula) throws BusInexistenteException {
+		
+		monitor.comienzoLectura();
+		
+		if (!excursiones.contiene(matricula)) {
+			monitor.terminoLectura();
+			throw new BusInexistenteException("No existe bus");
+		}
+		
+		Bus bus = buses.obtener(matricula);
+		List<VOExcursionSalida> excursionesBus = bus.listarExcursionesAsignadas();
+		
+		monitor.terminoLectura();
+		
+		return excursionesBus;
+	}
+	
+	public void registrarExcursion(VOExcursionEntrada voExcursion) throws YaExisteExcursionException, NoHayBusesDisponiblesException {
+		
+		monitor.comienzoEscritura();
+		
+		if (excursiones.contiene(voExcursion.getCodigo())) {
+			monitor.terminoEscritura();
+			throw new YaExisteExcursionException("Ya existe una excursion con el mismo codigo");
+		}
+		
+		Bus busDisponible = buses.obtenerBusDisponible(voExcursion.getFechaHoraPartida(),
+				voExcursion.getFechaHoraRegreso());
+
+		if (busDisponible == null) {
+			monitor.terminoEscritura();
+			throw new NoHayBusesDisponiblesException("No hay buses disponibles");
+		}
+		
+		Excursion excursion = new Excursion(voExcursion, busDisponible);
+		excursiones.agregar(excursion);
+		busDisponible.agregarExcursion(excursion);
+		
+		monitor.terminoEscritura();
+		
+	}
+
+	public void reasignarExcursion(String codigo) throws NoExisteExcursionException, NoHayBusesDisponiblesException {
+		
+		monitor.comienzoEscritura();
+		
+		if(!excursiones.contiene(codigo)) {
+			monitor.terminoEscritura();
+			throw new NoExisteExcursionException("No existe la excursion");
+		}
+		
+		Excursion excursion = excursiones.obtener(codigo);
+		Bus busDisponible = buses.obtenerOtroBusDisponible(excursion);
+		
+		if (busDisponible == null) {
+			monitor.terminoEscritura();
+			throw new NoHayBusesDisponiblesException("No hay otro bus disponible");
+		}
+		
+		Bus busAnterior = excursion.getBus();
+		busAnterior.borrarExcursion(excursion.getCodigo());
+		excursion.setBus(busDisponible);
+		busDisponible.agregarExcursion(excursion);
+		
+		monitor.terminoEscritura();
 	}
 	
 	public void respaldar() throws PersistenciaException {
@@ -45,6 +137,84 @@ public class Fachada {
 		}
 		
 		monitor.terminoEscritura();
+	}
+	
+	public void venderBoleto(VOBoletoEntrada voBoleto) throws NoExisteExcursionException, NoHayAsientosDisponiblesException {
+		
+		monitor.comienzoEscritura();
+		
+		if(!excursiones.contiene(voBoleto.getCodigoExcursion())) {
+			monitor.terminoEscritura();
+			throw new NoExisteExcursionException("No existe la excursion");
+		}
+		
+		Excursion excursion = excursiones.obtener(voBoleto.getCodigoExcursion());
+		
+		if (!excursion.hayAsientosDisponibles()) {
+			monitor.terminoEscritura();
+			throw new NoHayAsientosDisponiblesException("No hay asientos disponibles");
+		}
+		
+		excursion.agregarBoleto(voBoleto);
+		
+		monitor.terminoEscritura();
+		
+	}
+
+	public BigDecimal recaudacionExcursion(String codigo) throws NoExisteExcursionException {
+		
+		monitor.comienzoLectura();
+		
+		if(!excursiones.contiene(codigo)) {
+			monitor.terminoEscritura();
+			throw new NoExisteExcursionException("No existe la excursion");
+		}
+		
+		Excursion excursion = excursiones.obtener(codigo);
+		BigDecimal recaudacion = excursion.recaudacion();
+		
+		monitor.terminoLectura();
+		
+		return recaudacion;
+	}
+
+	public List<VOBoletoSalida> listarBoletosExcursion(String codigo, TipoBoleto tipo) throws NoExisteExcursionException {
+		
+		monitor.comienzoLectura();
+		
+		if(!excursiones.contiene(codigo)) {
+			monitor.terminoEscritura();
+			throw new NoExisteExcursionException("No existe la excursion");
+		}
+		
+		Excursion excursion = excursiones.obtener(codigo);
+		List<VOBoletoSalida> excursionesSalida = excursion.listarBoletos(tipo);
+		
+		monitor.terminoLectura();
+		
+		return excursionesSalida;
+	}
+	
+	public List<VOExcursionSalida> listarExcursionesHacia(String destino) {
+		
+		monitor.comienzoLectura();
+		
+		List<VOExcursionSalida> excursionesSalida = excursiones.listarExcursionesHacia(destino);
+		
+		monitor.terminoLectura();
+		
+		return excursionesSalida;
+	}
+	
+	public List<VOExcursionSalida> excursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) {
+
+		monitor.comienzoLectura();
+		
+		List<VOExcursionSalida> excursionesSalida = excursiones.listarExcursionesEntrePrecios(precioMin, precioMax);
+		
+		monitor.terminoLectura();
+		
+		return excursionesSalida;
 	}
 	
 }

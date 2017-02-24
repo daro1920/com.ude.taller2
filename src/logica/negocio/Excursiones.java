@@ -15,13 +15,13 @@ public class Excursiones extends Diccionario<String, Excursion>{
 	}
 	
 	public void agregar(Excursion excursion) {
-		this.poner(excursion.getCodigo(), excursion);
+		poner(excursion.getCodigo(), excursion);
 	}
 	
 	public List<VOExcursionSalida> listarExcursiones() {
 		
 		Excursion excursion;
-		Iterator<Excursion> iteradorExcursiones = this.iterador();
+		Iterator<Excursion> iteradorExcursiones = iterador();
 		List<VOExcursionSalida> excursionesSalida = new ArrayList<VOExcursionSalida>();
 		
 		while (iteradorExcursiones.hasNext()) {
@@ -70,7 +70,7 @@ public class Excursiones extends Diccionario<String, Excursion>{
 		return excursionesSalida;
 	}
 	
-	public List<VOExcursionSalida> listarExcursionesDeBus(String matricula) {
+	public List<VOExcursionSalida> listarExcursionesBus(String matricula) {
 		
 		Excursion excursion;
 		Iterator<Excursion> iteradorExcursiones = this.iterador();
