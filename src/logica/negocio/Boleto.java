@@ -1,6 +1,8 @@
 
 package logica.negocio;
 
+import java.math.BigDecimal;
+
 public class Boleto {
 
     private int numero;
@@ -8,7 +10,7 @@ public class Boleto {
     private String procedencia;
     private String celular;
 
-    public Boleto(int numero, int edad, String procedencia,String celular){
+    public Boleto(int numero, int edad, String procedencia, String celular){
 
         this.numero = numero;
         this.edad = edad;
@@ -20,19 +22,22 @@ public class Boleto {
     public int getNumero() {
         return numero;
     }
+    
     public int getEdad() {
         return edad;
     }
+    
     public String getProcedencia() {
         return procedencia;
     }
+    
     public String getCelular() {
         return celular;
     }
 
-    public double getPrecioFinal(double precioBase) {
+    public BigDecimal getPrecioFinal(BigDecimal precioBase) {
 
-        double precioFinal = edad > 12 ? precioBase : precioBase - (precioBase * 0.80);
+        BigDecimal precioFinal = edad > 12 ? precioBase : precioBase.multiply(BigDecimal.valueOf(0.80));
 
         return precioFinal;
     }

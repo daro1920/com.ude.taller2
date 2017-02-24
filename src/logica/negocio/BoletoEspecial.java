@@ -1,22 +1,25 @@
 package logica.negocio;
 
+import java.math.BigDecimal;
+
 public class BoletoEspecial extends Boleto {
 
-    private int descuento;
+    private BigDecimal descuento;
 
-    public BoletoEspecial(int numero, int edad, String procedencia,String celular,int descuento) {
+    public BoletoEspecial(int numero, int edad, String procedencia, String celular, BigDecimal descuento) {
 
         super(numero,edad,procedencia,celular);
         this.descuento = descuento;
 
     }
 
-    public int getDescuento() {
+    public BigDecimal getDescuento() {
         return descuento;
     }
 
-    public double getPrecioFinal(double precioBase){
+    public BigDecimal getPrecioFinal(BigDecimal precioBase) {
 
-        return super.getPrecioFinal(precioBase) - descuento;
+        return super.getPrecioFinal(precioBase).subtract(descuento);
+        
     }
 }
