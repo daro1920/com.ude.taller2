@@ -1,6 +1,6 @@
 package logica.negocio;
 
-import valueobjects.VOBoleto;
+import logica.valueobjects.VOBoleto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
