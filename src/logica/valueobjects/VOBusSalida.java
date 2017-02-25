@@ -1,15 +1,15 @@
 package logica.valueobjects;
 
-public class VOBusSalida {
+public class VOBusSalida extends VOBusEntrada{
 
 	private int cantidadExcursiones;
 	
-	public void VOBusSalida(String matricula, String marca,int capacidad,int cantidadExcursiones) { 
-		throw new UnsupportedOperationException("Metodo no implementado, aun");
+	public VOBusSalida(String matricula, String marca, int capacidad, int cantidadExcursiones) {
+		super(matricula, marca, capacidad);
+		this.cantidadExcursiones = cantidadExcursiones;
 	}
 	
 	public int getCantidadExcursiones() {
-		/*Bus auxiliar =*/
-		throw new UnsupportedOperationException("Metodo no implementado, aun");
+		return this.cantidadExcursiones;
 	}
 }

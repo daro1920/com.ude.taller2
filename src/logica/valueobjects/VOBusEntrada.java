@@ -6,7 +6,7 @@ private String matricula;
 private String marca;
 private int capacidad;
 
-public void VOBusEntrada(String matricula, String marca, int capacidad){}
+public VOBusEntrada(String matricula, String marca, int capacidad){}
 public String getMatricula(){
 	return this.matricula;
 }

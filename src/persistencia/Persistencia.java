@@ -7,7 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import logica.excepciones.PersistenciaException;
-import logica.negocio.Fachada;
 import logica.valueobjects.VOFachadaPersistencia;
 
 public class Persistencia {

@@ -19,6 +19,7 @@ import logica.valueobjects.VOExcursionSalida;
 import logica.valueobjects.VOFachadaPersistencia;
 import persistencia.Persistencia;
 
+@SuppressWarnings("serial")
 public class Fachada extends UnicastRemoteObject implements IFachada {
 
 	private Buses buses;
@@ -33,9 +34,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	
 //	+ registrarBus(VOBusEntrada. TipoError &) : void
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#listarBuses()
-	 */
 	@Override
 	public List<VOBusSalida> listarBuses() {
 		monitor.comienzoLectura();
@@ -47,9 +45,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		return busesSalida;
 	}
 
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#listarExcursionesBus(java.lang.String)
-	 */
 	@Override
 	public List<VOExcursionSalida> listarExcursionesBus(String matricula) throws BusInexistenteException {
 		
@@ -68,9 +63,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		return excursionesBus;
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#registrarExcursion(logica.valueobjects.VOExcursionEntrada)
-	 */
 	@Override
 	public void registrarExcursion(VOExcursionEntrada voExcursion) throws YaExisteExcursionException, NoHayBusesDisponiblesException {
 		
@@ -97,9 +89,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#reasignarExcursion(java.lang.String)
-	 */
 	@Override
 	public void reasignarExcursion(String codigo) throws NoExisteExcursionException, NoHayBusesDisponiblesException {
 		
@@ -126,9 +115,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		monitor.terminoEscritura();
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#respaldar()
-	 */
 	@Override
 	public void respaldar() throws PersistenciaException {
 		monitor.comienzoLectura();
@@ -145,9 +131,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		monitor.terminoLectura();
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#recuperar()
-	 */
 	@Override
 	public void recuperar() throws PersistenciaException {
 		monitor.comienzoEscritura();
@@ -165,9 +148,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		monitor.terminoEscritura();
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#venderBoleto(logica.valueobjects.VOBoletoEntrada)
-	 */
 	@Override
 	public void venderBoleto(VOBoletoEntrada voBoleto) throws NoExisteExcursionException, NoHayAsientosDisponiblesException {
 		
@@ -191,9 +171,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#recaudacionExcursion(java.lang.String)
-	 */
 	@Override
 	public BigDecimal recaudacionExcursion(String codigo) throws NoExisteExcursionException {
 		
@@ -212,9 +189,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		return recaudacion;
 	}
 
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#listarBoletosExcursion(java.lang.String, logica.negocio.TipoBoleto)
-	 */
 	@Override
 	public List<VOBoletoSalida> listarBoletosExcursion(String codigo, TipoBoleto tipo) throws NoExisteExcursionException {
 		
@@ -233,9 +207,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		return excursionesSalida;
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#listarExcursionesHacia(java.lang.String)
-	 */
 	@Override
 	public List<VOExcursionSalida> listarExcursionesHacia(String destino) {
 		
@@ -248,9 +219,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		return excursionesSalida;
 	}
 	
-	/* (non-Javadoc)
-	 * @see logica.negocio.IFachada#excursionesEntrePrecios(java.math.BigDecimal, java.math.BigDecimal)
-	 */
 	@Override
 	public List<VOExcursionSalida> excursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) {
 

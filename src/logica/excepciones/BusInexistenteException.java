@@ -1,5 +1,6 @@
 package logica.excepciones;
 
+@SuppressWarnings("serial")
 public class BusInexistenteException extends Exception {
 
 	public BusInexistenteException() {

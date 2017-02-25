@@ -1,5 +1,6 @@
 package logica.excepciones;
 
+@SuppressWarnings("serial")
 public class NoHayAsientosDisponiblesException extends Exception {
 
 	public NoHayAsientosDisponiblesException() {

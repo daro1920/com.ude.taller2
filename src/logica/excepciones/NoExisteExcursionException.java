@@ -1,5 +1,6 @@
 package logica.excepciones;
 
+@SuppressWarnings("serial")
 public class NoExisteExcursionException extends Exception {
 
 	public NoExisteExcursionException() {

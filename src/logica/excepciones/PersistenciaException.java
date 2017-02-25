@@ -1,5 +1,6 @@
 package logica.excepciones;
 
+@SuppressWarnings("serial")
 public class PersistenciaException extends Exception {
 	
 	public PersistenciaException() {
