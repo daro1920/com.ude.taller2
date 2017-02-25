@@ -67,7 +67,7 @@ public class Excursion {
 		this.bus = bus;
 	}
 	
-	public List<VOBoletoSalida>listarBoletos(TipoBoleto tipo) {
+	public List<VOBoletoSalida> listarBoletos(TipoBoleto tipo) {
 		return boletos.listarBoletos(tipo);
 	}
 

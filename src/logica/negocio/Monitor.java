@@ -10,19 +10,39 @@ public class Monitor {
 	}
 	
 	public void comienzoLectura() {
+		while (escribiendo) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		cantLectores ++;
 	}
 	
 	public void terminoLectura() {
+		cantLectores --;
 		
+		notify();
 	}
 	
 	public void comienzoEscritura() {
+		while (cantLectores > 0 || escribiendo) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		escribiendo = true;
 	}
 	
 	public void terminoEscritura() {
-		
+		escribiendo = false;
+		notify();
 	}
 	
 }

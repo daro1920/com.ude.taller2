@@ -1,6 +1,8 @@
 package logica.negocio;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import logica.excepciones.BusInexistenteException;
@@ -17,13 +19,13 @@ import logica.valueobjects.VOExcursionSalida;
 import logica.valueobjects.VOFachadaPersistencia;
 import persistencia.Persistencia;
 
-public class Fachada {
+public class Fachada extends UnicastRemoteObject implements IFachada {
 
 	private Buses buses;
 	private Excursiones excursiones;
 	private Monitor monitor;
 	
-	public Fachada() {
+	public Fachada() throws RemoteException {
 		buses = new Buses();
 		excursiones = new Excursiones();
 		monitor = new Monitor();
@@ -31,6 +33,10 @@ public class Fachada {
 	
 //	+ registrarBus(VOBusEntrada. TipoError &) : void
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#listarBuses()
+	 */
+	@Override
 	public List<VOBusSalida> listarBuses() {
 		monitor.comienzoLectura();
 		
@@ -41,6 +47,10 @@ public class Fachada {
 		return busesSalida;
 	}
 
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#listarExcursionesBus(java.lang.String)
+	 */
+	@Override
 	public List<VOExcursionSalida> listarExcursionesBus(String matricula) throws BusInexistenteException {
 		
 		monitor.comienzoLectura();
@@ -58,6 +68,10 @@ public class Fachada {
 		return excursionesBus;
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#registrarExcursion(logica.valueobjects.VOExcursionEntrada)
+	 */
+	@Override
 	public void registrarExcursion(VOExcursionEntrada voExcursion) throws YaExisteExcursionException, NoHayBusesDisponiblesException {
 		
 		monitor.comienzoEscritura();
@@ -83,6 +97,10 @@ public class Fachada {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#reasignarExcursion(java.lang.String)
+	 */
+	@Override
 	public void reasignarExcursion(String codigo) throws NoExisteExcursionException, NoHayBusesDisponiblesException {
 		
 		monitor.comienzoEscritura();
@@ -108,6 +126,10 @@ public class Fachada {
 		monitor.terminoEscritura();
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#respaldar()
+	 */
+	@Override
 	public void respaldar() throws PersistenciaException {
 		monitor.comienzoLectura();
 		
@@ -123,6 +145,10 @@ public class Fachada {
 		monitor.terminoLectura();
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#recuperar()
+	 */
+	@Override
 	public void recuperar() throws PersistenciaException {
 		monitor.comienzoEscritura();
 		
@@ -139,6 +165,10 @@ public class Fachada {
 		monitor.terminoEscritura();
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#venderBoleto(logica.valueobjects.VOBoletoEntrada)
+	 */
+	@Override
 	public void venderBoleto(VOBoletoEntrada voBoleto) throws NoExisteExcursionException, NoHayAsientosDisponiblesException {
 		
 		monitor.comienzoEscritura();
@@ -161,6 +191,10 @@ public class Fachada {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#recaudacionExcursion(java.lang.String)
+	 */
+	@Override
 	public BigDecimal recaudacionExcursion(String codigo) throws NoExisteExcursionException {
 		
 		monitor.comienzoLectura();
@@ -178,6 +212,10 @@ public class Fachada {
 		return recaudacion;
 	}
 
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#listarBoletosExcursion(java.lang.String, logica.negocio.TipoBoleto)
+	 */
+	@Override
 	public List<VOBoletoSalida> listarBoletosExcursion(String codigo, TipoBoleto tipo) throws NoExisteExcursionException {
 		
 		monitor.comienzoLectura();
@@ -195,6 +233,10 @@ public class Fachada {
 		return excursionesSalida;
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#listarExcursionesHacia(java.lang.String)
+	 */
+	@Override
 	public List<VOExcursionSalida> listarExcursionesHacia(String destino) {
 		
 		monitor.comienzoLectura();
@@ -206,6 +248,10 @@ public class Fachada {
 		return excursionesSalida;
 	}
 	
+	/* (non-Javadoc)
+	 * @see logica.negocio.IFachada#excursionesEntrePrecios(java.math.BigDecimal, java.math.BigDecimal)
+	 */
+	@Override
 	public List<VOExcursionSalida> excursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) {
 
 		monitor.comienzoLectura();
