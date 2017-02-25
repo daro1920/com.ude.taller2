@@ -5,23 +5,36 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import logica.excepciones.ConfiguracionException;
 import logica.negocio.IFachada;
+import configuracion.Configuracion;
 
 public class Cliente {
+	
+	private static IFachada fachada; 
+	
 	public static void main (String [] args) {
-		try
-		{
-			IFachada fachada = (IFachada) Naming.lookup("//localhost:1099/fachada");
+		
+		String ipServidor;
+		String puertoServidor;
+
+		try {
+
+			ipServidor = Configuracion.getProperty("ipServidor");
+			puertoServidor = Configuracion.getProperty("puertoServidor");
+			fachada = (IFachada) Naming.lookup("//" + ipServidor + ":" + puertoServidor + "/fachada");
 			fachada.listarBuses();
-		}
-		catch (MalformedURLException e) {
 			
+		} catch (ConfiguracionException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
-		catch (RemoteException e) {
-			
-		}
-		catch (NotBoundException e) {
-			
-		}
+		
 	}
+
 }

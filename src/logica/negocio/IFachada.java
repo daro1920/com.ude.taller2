@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import logica.excepciones.BusInexistenteException;
+import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
 import logica.excepciones.NoHayBusesDisponiblesException;
@@ -32,9 +33,9 @@ public interface IFachada extends Remote {
 			throws NoExisteExcursionException, NoHayBusesDisponiblesException,
 			RemoteException;
 
-	public void respaldar() throws PersistenciaException, RemoteException;
+	public void respaldar() throws PersistenciaException, RemoteException, ConfiguracionException;
 
-	public void recuperar() throws PersistenciaException, RemoteException;
+	public void recuperar() throws PersistenciaException, RemoteException, ConfiguracionException;
 
 	public void venderBoleto(VOBoletoEntrada voBoleto)
 			throws NoExisteExcursionException,

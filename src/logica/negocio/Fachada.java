@@ -5,7 +5,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import configuracion.Configuracion;
 import logica.excepciones.BusInexistenteException;
+import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
 import logica.excepciones.NoHayBusesDisponiblesException;
@@ -115,13 +117,16 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void respaldar() throws PersistenciaException {
+	public void respaldar() throws PersistenciaException, ConfiguracionException {
+
+		String nombreArchivo = Configuracion.getProperty("archivorRespaldo");
+		Persistencia persistencia = new Persistencia();
+		VOFachadaPersistencia voFachada = new VOFachadaPersistencia(buses, excursiones);
+		
 		monitor.comienzoLectura();
 		
-		VOFachadaPersistencia voFachada = new VOFachadaPersistencia(buses, excursiones);
 		try {
-			Persistencia persistencia = new Persistencia();
-			persistencia.respaldar("datos.dat",voFachada);
+			persistencia.respaldar(nombreArchivo,voFachada);
 		} catch (PersistenciaException e) {
 			monitor.terminoLectura();
 			throw e;
@@ -131,20 +136,27 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void recuperar() throws PersistenciaException {
+	public void recuperar() throws PersistenciaException, ConfiguracionException {
+		
+		VOFachadaPersistencia voFachada = obtenerArchivoRecuperacion();
+		
 		monitor.comienzoEscritura();
 		
-		try {
-			Persistencia persistencia = new Persistencia();
-			VOFachadaPersistencia voFachada = persistencia.recuperar("datos.dat");
-			buses = voFachada.getBuses();
-			excursiones = voFachada.getExcursiones();
-		} catch (PersistenciaException e) {
-			monitor.terminoEscritura();
-			throw e;
-		}
+		buses = voFachada.getBuses();
+		excursiones = voFachada.getExcursiones();
 		
 		monitor.terminoEscritura();
+	}
+	
+	private VOFachadaPersistencia obtenerArchivoRecuperacion() throws PersistenciaException, ConfiguracionException {
+		
+		VOFachadaPersistencia voFachada;
+		Persistencia persistencia = new Persistencia();
+		String nombreArchivo = Configuracion.getProperty("archivoRespaldo");
+		
+		voFachada = persistencia.recuperar(nombreArchivo);
+		
+		return voFachada;
 	}
 	
 	@Override
