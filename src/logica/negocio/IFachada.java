@@ -49,7 +49,7 @@ public interface IFachada extends Remote {
 
 	public List<VOExcursionSalida> listarExcursionesHacia(String destino) throws RemoteException;
 
-	public List<VOExcursionSalida> excursionesEntrePrecios(
+	public List<VOExcursionSalida> listarExcursionesEntrePrecios(
 			BigDecimal precioMin, BigDecimal precioMax) throws RemoteException;
 
 }

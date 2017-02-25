@@ -36,7 +36,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 //	+ registrarBus(VOBusEntrada. TipoError &) : void
 	
 	@Override
-	public List<VOBusSalida> listarBuses() {
+	public List<VOBusSalida> listarBuses() throws RemoteException {
 		monitor.comienzoLectura();
 		
 		List<VOBusSalida> busesSalida = buses.listarBuses();
@@ -47,7 +47,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 
 	@Override
-	public List<VOExcursionSalida> listarExcursionesBus(String matricula) throws BusInexistenteException {
+	public List<VOExcursionSalida> listarExcursionesBus(String matricula) throws RemoteException, BusInexistenteException {
 		
 		monitor.comienzoLectura();
 		
@@ -65,7 +65,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void registrarExcursion(VOExcursionEntrada voExcursion) throws YaExisteExcursionException, NoHayBusesDisponiblesException {
+	public void registrarExcursion(VOExcursionEntrada voExcursion) throws RemoteException, YaExisteExcursionException, NoHayBusesDisponiblesException {
 		
 		monitor.comienzoEscritura();
 		
@@ -91,7 +91,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 
 	@Override
-	public void reasignarExcursion(String codigo) throws NoExisteExcursionException, NoHayBusesDisponiblesException {
+	public void reasignarExcursion(String codigo) throws RemoteException, NoExisteExcursionException, NoHayBusesDisponiblesException {
 		
 		monitor.comienzoEscritura();
 		
@@ -117,13 +117,15 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void respaldar() throws PersistenciaException, ConfiguracionException {
+	public void respaldar() throws RemoteException, PersistenciaException, ConfiguracionException {
 
+		VOFachadaPersistencia voFachada;
 		String nombreArchivo = Configuracion.getProperty("archivorRespaldo");
 		Persistencia persistencia = new Persistencia();
-		VOFachadaPersistencia voFachada = new VOFachadaPersistencia(buses, excursiones);
 		
 		monitor.comienzoLectura();
+		
+		voFachada = new VOFachadaPersistencia(buses, excursiones);
 		
 		try {
 			persistencia.respaldar(nombreArchivo,voFachada);
@@ -136,7 +138,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void recuperar() throws PersistenciaException, ConfiguracionException {
+	public void recuperar() throws RemoteException, PersistenciaException, ConfiguracionException {
 		
 		VOFachadaPersistencia voFachada = obtenerArchivoRecuperacion();
 		
@@ -160,7 +162,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void venderBoleto(VOBoletoEntrada voBoleto) throws NoExisteExcursionException, NoHayAsientosDisponiblesException {
+	public void venderBoleto(VOBoletoEntrada voBoleto) throws RemoteException, NoExisteExcursionException, NoHayAsientosDisponiblesException {
 		
 		monitor.comienzoEscritura();
 		
@@ -183,7 +185,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 
 	@Override
-	public BigDecimal recaudacionExcursion(String codigo) throws NoExisteExcursionException {
+	public BigDecimal recaudacionExcursion(String codigo) throws RemoteException, NoExisteExcursionException {
 		
 		monitor.comienzoLectura();
 		
@@ -201,7 +203,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 
 	@Override
-	public List<VOBoletoSalida> listarBoletosExcursion(String codigo, TipoBoleto tipo) throws NoExisteExcursionException {
+	public List<VOBoletoSalida> listarBoletosExcursion(String codigo, TipoBoleto tipo) throws RemoteException, NoExisteExcursionException {
 		
 		monitor.comienzoLectura();
 		
@@ -219,7 +221,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public List<VOExcursionSalida> listarExcursionesHacia(String destino) {
+	public List<VOExcursionSalida> listarExcursionesHacia(String destino) throws RemoteException {
 		
 		monitor.comienzoLectura();
 		
@@ -231,7 +233,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public List<VOExcursionSalida> excursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) {
+	public List<VOExcursionSalida> listarExcursionesEntrePrecios(BigDecimal precioMin, BigDecimal precioMax) throws RemoteException {
 
 		monitor.comienzoLectura();
 		
