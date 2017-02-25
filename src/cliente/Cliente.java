@@ -1,4 +1,5 @@
 package cliente;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -23,4 +24,4 @@ public class Cliente {
 			
 		}
 	}
-} // fin de la clase
+}
