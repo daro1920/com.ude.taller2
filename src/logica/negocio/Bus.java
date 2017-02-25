@@ -1,10 +1,12 @@
 package logica.negocio;
 
+import java.io.Serializable;
 import java.util.List;
 
 import logica.valueobjects.VOExcursionSalida;
 
-public class Bus {
+@SuppressWarnings("serial")
+public class Bus implements Serializable {
 	
 	private String matricula;
 	private String marca;

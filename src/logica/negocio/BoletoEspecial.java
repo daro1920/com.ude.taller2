@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import logica.valueobjects.VOBoletoEspecialSalida;
 import logica.valueobjects.VOBoletoSalida;
 
+@SuppressWarnings("serial")
 public class BoletoEspecial extends Boleto {
 
     private BigDecimal descuento;

@@ -1,12 +1,14 @@
 package logica.negocio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import logica.valueobjects.VOBoletoSalida;
 
-public class Boletos {
+@SuppressWarnings("serial")
+public class Boletos implements Serializable {
 
     private List<Boleto> boletos =  new ArrayList<Boleto>();
 

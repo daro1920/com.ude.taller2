@@ -1,11 +1,13 @@
 
 package logica.negocio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import logica.valueobjects.VOBoletoSalida;
 
-public class Boleto {
+@SuppressWarnings("serial")
+public class Boleto implements Serializable {
 
     private int numero;
     private int edad;

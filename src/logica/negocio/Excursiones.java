@@ -1,5 +1,6 @@
 package logica.negocio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +9,8 @@ import java.util.List;
 
 import logica.valueobjects.VOExcursionSalida;
 
-public class Excursiones extends Diccionario<String, Excursion>{
+@SuppressWarnings("serial")
+public class Excursiones extends Diccionario<String, Excursion> implements Serializable {
 
 	public Excursiones() {
 		super();

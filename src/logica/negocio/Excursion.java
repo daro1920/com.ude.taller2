@@ -1,5 +1,6 @@
 package logica.negocio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,8 @@ import logica.valueobjects.VOBoletoSalida;
 import logica.valueobjects.VOExcursionEntrada;
 import logica.valueobjects.VOExcursionSalida;
 
-public class Excursion {
+@SuppressWarnings("serial")
+public class Excursion implements Serializable {
 	
 	private	String		codigo;
 	private	String		destino;

@@ -1,11 +1,13 @@
 package logica.negocio;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import logica.valueobjects.VOBusSalida;
 
 
-public class Buses extends Diccionario<String, Bus> {
+@SuppressWarnings("serial")
+public class Buses extends Diccionario<String, Bus> implements Serializable {
 	
 	public Buses() {
 		super();

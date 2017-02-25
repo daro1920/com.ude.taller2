@@ -19,7 +19,6 @@ import logica.valueobjects.VOExcursionSalida;
 import logica.valueobjects.VOFachadaPersistencia;
 import persistencia.Persistencia;
 
-@SuppressWarnings("serial")
 public class Fachada extends UnicastRemoteObject implements IFachada {
 
 	private Buses buses;

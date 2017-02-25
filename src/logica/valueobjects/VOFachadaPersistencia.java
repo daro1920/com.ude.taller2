@@ -1,9 +1,12 @@
 package logica.valueobjects;
 
+import java.io.Serializable;
+
 import logica.negocio.Buses;
 import logica.negocio.Excursiones;
 
-public class VOFachadaPersistencia {
+@SuppressWarnings("serial")
+public class VOFachadaPersistencia implements Serializable {
 	
 	private Buses buses;
 	private Excursiones excursiones;
