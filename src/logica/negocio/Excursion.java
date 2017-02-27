@@ -131,4 +131,11 @@ public class Excursion implements Serializable {
 		return bus.getMatricula().equals(matricula);
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null
+				&& obj instanceof Excursion
+				&& ((Excursion)obj).getCodigo().equals(codigo);
+	}
+	
 }
