@@ -38,7 +38,7 @@ public class PruebasExcursion {
 		BigDecimal precioBase;
 		Bus bus;
 		Excursion excursion;
-		boolean pasada;
+		boolean resultado;
 		
 		impresora.imprimirEncabezadoSeccion("Excursion(codigo, destino, fechaHoraPartida,\n"
 				+ "		fechaHoraRegreso, precioBase, bus)");
@@ -52,29 +52,31 @@ public class PruebasExcursion {
 		
 		excursion = new Excursion(codigo, destino, fechaHoraPartida, fechaHoraRegreso, precioBase, bus);
 		
-		pasada = excursion.getCodigo().equals(codigo);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.1", pasada);
+		resultado = excursion.getCodigo().equals(codigo);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.1", resultado);
 		
-		pasada = excursion.getDestino().equals(destino);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.2", pasada);
+		resultado = excursion.getDestino().equals(destino);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.2", resultado);
 		
-		pasada = excursion.getFechaHoraPartida().equals(fechaHoraPartida);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.3", pasada);
+		resultado = excursion.getFechaHoraPartida().equals(fechaHoraPartida);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.3", resultado);
 		
-		pasada = excursion.getFechaHoraRegreso().equals(fechaHoraRegreso);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.4", pasada);
+		resultado = excursion.getFechaHoraRegreso().equals(fechaHoraRegreso);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.4", resultado);
 		
-		pasada = excursion.getPrecioBase().equals(precioBase);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.5", pasada);
+		resultado = excursion.getPrecioBase().equals(precioBase);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.5", resultado);
 		
-		pasada = excursion.getBus().equals(bus);
-		contador.agregarResultadoPrueba(pasada);
-		impresora.imprimirResultadoIndividual("Prueba 1.6", pasada);
+		resultado = excursion.getBus().equals(bus);
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 1.6", resultado);
+		
+		impresora.imprimirResultadoSeccion(contador);
 		 
 		return contador;
 		
