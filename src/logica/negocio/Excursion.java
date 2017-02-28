@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import logica.excepciones.PeriodoInvalidoException;
 import logica.valueobjects.VOBoletoEntrada;
 import logica.valueobjects.VOBoletoEspecialEntrada;
 import logica.valueobjects.VOBoletoSalida;
@@ -24,7 +25,11 @@ public class Excursion implements Serializable {
 	private int			proximoNroBoleto;
 
 	public Excursion(String codigo, String destino, Date fechaHoraPartida,
-			Date fechaHoraRegreso, BigDecimal precioBase, Bus bus) {
+			Date fechaHoraRegreso, BigDecimal precioBase, Bus bus) throws PeriodoInvalidoException {
+		if (!partidaAnteriorRegreso(fechaHoraPartida, fechaHoraRegreso)) {
+			throw new PeriodoInvalidoException("La partida debe ser anterior al regreso");
+		}
+		
 		this.codigo = codigo;
 		this.destino = destino;
 		this.fechaHoraPartida = fechaHoraPartida;
@@ -35,8 +40,13 @@ public class Excursion implements Serializable {
 		this.boletos = new Boletos();
 		this.proximoNroBoleto = 1;
 	}
-	
-	public Excursion(VOExcursionEntrada voExcursion, Bus bus) {
+
+	private boolean partidaAnteriorRegreso(Date fechaHoraPartida,
+			Date fechaHoraRegreso) {
+		return fechaHoraPartida.compareTo(fechaHoraRegreso) < 0;
+	}
+
+	public Excursion(VOExcursionEntrada voExcursion, Bus bus) throws PeriodoInvalidoException {
 		this(voExcursion.getCodigo(), voExcursion.getDestino(), voExcursion.getFechaHoraPartida(),
 				voExcursion.getFechaHoraRegreso(), voExcursion.getPrecioBase(), bus);
 	}

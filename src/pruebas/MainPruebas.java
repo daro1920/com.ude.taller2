@@ -9,7 +9,6 @@ public class MainPruebas {
 	}
 
 	private static void correrPruebasExcursion() {
-
 		PruebasExcursion pruebasExcursion = new PruebasExcursion();
 		pruebasExcursion.correrPruebas();
 	} 

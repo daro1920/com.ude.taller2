@@ -11,6 +11,7 @@ import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
 import logica.excepciones.NoHayBusesDisponiblesException;
+import logica.excepciones.PeriodoInvalidoException;
 import logica.excepciones.PersistenciaException;
 import logica.excepciones.YaExisteExcursionException;
 import logica.valueobjects.VOBoletoEntrada;
@@ -21,6 +22,7 @@ import logica.valueobjects.VOExcursionSalida;
 import logica.valueobjects.VOFachadaPersistencia;
 import persistencia.Persistencia;
 
+@SuppressWarnings("serial")
 public class Fachada extends UnicastRemoteObject implements IFachada {
 
 	private Buses buses;
@@ -65,7 +67,9 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 	@Override
-	public void registrarExcursion(VOExcursionEntrada voExcursion) throws RemoteException, YaExisteExcursionException, NoHayBusesDisponiblesException {
+	public void registrarExcursion(VOExcursionEntrada voExcursion)
+			throws RemoteException, YaExisteExcursionException,
+			NoHayBusesDisponiblesException, PeriodoInvalidoException {
 		
 		monitor.comienzoEscritura();
 		
@@ -82,7 +86,14 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 			throw new NoHayBusesDisponiblesException("No hay buses disponibles");
 		}
 		
-		Excursion excursion = new Excursion(voExcursion, busDisponible);
+		Excursion excursion;
+		
+		try {
+			excursion = new Excursion(voExcursion, busDisponible);
+		} catch (PeriodoInvalidoException e) {
+			monitor.terminoEscritura();
+			throw e;
+		}
 		excursiones.agregar(excursion);
 		busDisponible.agregarExcursion(excursion);
 		
