@@ -3,3 +3,5 @@ ExcursionesDiablo.iml
 .idea/description.html
 bin/logica/negocio/Excursiones.class
 bin/logica/negocio/Excursiones.class
+bin/logica/negocio/Excursion.class
+bin/logica/negocio/Fachada.class

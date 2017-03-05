@@ -73,27 +73,28 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		
 		monitor.comienzoEscritura();
 		
+		Excursion excursion;
+		Bus busDisponible;
+		
 		if (excursiones.contiene(voExcursion.getCodigo())) {
 			monitor.terminoEscritura();
 			throw new YaExisteExcursionException("Ya existe una excursion con el mismo codigo");
 		}
 		
-		Bus busDisponible = buses.obtenerBusDisponible(voExcursion.getFechaHoraPartida(),
-				voExcursion.getFechaHoraRegreso());
+		try {
+			excursion = new Excursion(voExcursion);
+		} catch (PeriodoInvalidoException e) {
+			monitor.terminoEscritura();
+			throw e;
+		}
+		
+		busDisponible = buses.obtenerBusDisponible(excursion);
 
 		if (busDisponible == null) {
 			monitor.terminoEscritura();
 			throw new NoHayBusesDisponiblesException("No hay buses disponibles");
 		}
-		
-		Excursion excursion;
-		
-		try {
-			excursion = new Excursion(voExcursion, busDisponible);
-		} catch (PeriodoInvalidoException e) {
-			monitor.terminoEscritura();
-			throw e;
-		}
+		excursion.setBus(busDisponible);
 		excursiones.agregar(excursion);
 		busDisponible.agregarExcursion(excursion);
 		

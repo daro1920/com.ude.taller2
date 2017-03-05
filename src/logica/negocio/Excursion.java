@@ -23,9 +23,9 @@ public class Excursion implements Serializable {
 	private Bus			bus;
 	private Boletos		boletos;
 	private int			proximoNroBoleto;
-
+	
 	public Excursion(String codigo, String destino, Date fechaHoraPartida,
-			Date fechaHoraRegreso, BigDecimal precioBase, Bus bus) throws PeriodoInvalidoException {
+			Date fechaHoraRegreso, BigDecimal precioBase) throws PeriodoInvalidoException {
 		if (!partidaAnteriorRegreso(fechaHoraPartida, fechaHoraRegreso)) {
 			throw new PeriodoInvalidoException("La partida debe ser anterior al regreso");
 		}
@@ -35,7 +35,7 @@ public class Excursion implements Serializable {
 		this.fechaHoraPartida = fechaHoraPartida;
 		this.fechaHoraRegreso = fechaHoraRegreso;
 		this.precioBase = precioBase;
-		this.bus = bus;
+		this.bus = null;
 		
 		this.boletos = new Boletos();
 		this.proximoNroBoleto = 1;
@@ -44,6 +44,19 @@ public class Excursion implements Serializable {
 	private boolean partidaAnteriorRegreso(Date fechaHoraPartida,
 			Date fechaHoraRegreso) {
 		return fechaHoraPartida.compareTo(fechaHoraRegreso) < 0;
+	}
+	
+	public Excursion(VOExcursionEntrada voExcursion) throws PeriodoInvalidoException {
+		this(voExcursion.getCodigo(), voExcursion.getDestino(), voExcursion.getFechaHoraPartida(),
+				voExcursion.getFechaHoraRegreso(), voExcursion.getPrecioBase());
+	}
+
+	public Excursion(String codigo, String destino, Date fechaHoraPartida,
+			Date fechaHoraRegreso, BigDecimal precioBase, Bus bus) throws PeriodoInvalidoException {
+		
+		this(codigo, destino, fechaHoraPartida, fechaHoraRegreso, precioBase);
+		
+		this.bus = bus;
 	}
 
 	public Excursion(VOExcursionEntrada voExcursion, Bus bus) throws PeriodoInvalidoException {
