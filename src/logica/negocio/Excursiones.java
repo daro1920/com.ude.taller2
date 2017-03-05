@@ -89,4 +89,21 @@ public class Excursiones extends Diccionario<String, Excursion> implements Seria
 		
 		return excursionesSalida;
 	}
+
+	public boolean hayColisionCon(Excursion excursion) {
+		
+		Iterator<Excursion> iterador = iterador();
+		Excursion excursionActual;
+		boolean hayColision = false;
+		
+		while (iterador.hasNext()) {
+			excursionActual = iterador.next();
+			if (excursionActual.colisionaCon(excursion)) {
+				hayColision = true;
+				break;
+			}
+		}
+		
+		return hayColision;
+	}
 }
