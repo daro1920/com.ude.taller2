@@ -6,14 +6,21 @@ private String matricula;
 private String marca;
 private int capacidad;
 
-public VOBusEntrada(String matricula, String marca, int capacidad){}
+public VOBusEntrada(String matricula, String marca, int capacidad){
+	
+	this.matricula = matricula;
+	this.marca = marca;
+	this.capacidad = capacidad;
+}
+
+
 public String getMatricula(){
-	return this.matricula;
+	return matricula;
 }
 public String getMarca(){
-	return this.marca;
+	return marca;
 }
 public int getCapacidad(){
-	return this.capacidad;
+	return capacidad;
 }
 }

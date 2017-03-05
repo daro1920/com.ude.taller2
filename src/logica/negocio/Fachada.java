@@ -7,15 +7,18 @@ import java.util.List;
 
 import configuracion.Configuracion;
 import logica.excepciones.BusInexistenteException;
+import logica.excepciones.CapacidadBusMenorACeroException;
 import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
 import logica.excepciones.NoHayBusesDisponiblesException;
 import logica.excepciones.PeriodoInvalidoException;
 import logica.excepciones.PersistenciaException;
+import logica.excepciones.YaExisteBusException;
 import logica.excepciones.YaExisteExcursionException;
 import logica.valueobjects.VOBoletoEntrada;
 import logica.valueobjects.VOBoletoSalida;
+import logica.valueobjects.VOBusEntrada;
 import logica.valueobjects.VOBusSalida;
 import logica.valueobjects.VOExcursionEntrada;
 import logica.valueobjects.VOExcursionSalida;
@@ -36,6 +39,39 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 //	+ registrarBus(VOBusEntrada. TipoError &) : void
+
+	
+	
+	@Override
+	public void registrarBus(VOBusEntrada voBus)
+			throws RemoteException, YaExisteBusException,
+			CapacidadBusMenorACeroException {
+		
+		monitor.comienzoEscritura();
+		
+		Bus bus;
+		
+		if (buses.contiene(voBus.getMatricula())) {
+			monitor.terminoEscritura();
+			throw new YaExisteBusException("Ya existe un bus con la misma matricula");
+		}
+		
+		try {
+			bus = new Bus(voBus);
+		} catch (CapacidadBusMenorACeroException e) {
+			monitor.terminoEscritura();
+			throw e;
+		}
+		
+		
+		buses.agregar(bus);
+		
+		monitor.terminoEscritura();
+		
+	}
+	 
+	
+	
 	
 	@Override
 	public List<VOBusSalida> listarBuses() throws RemoteException {

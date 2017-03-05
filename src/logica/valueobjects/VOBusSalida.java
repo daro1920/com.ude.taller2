@@ -1,6 +1,6 @@
 package logica.valueobjects;
 
-public class VOBusSalida extends VOBusEntrada{
+public class VOBusSalida extends VOBusEntrada implements Comparable<VOBusSalida>{
 
 	private int cantidadExcursiones;
 	
@@ -11,5 +11,10 @@ public class VOBusSalida extends VOBusEntrada{
 	
 	public int getCantidadExcursiones() {
 		return this.cantidadExcursiones;
+	}
+	
+	@Override
+	public int compareTo(VOBusSalida otroBus) {
+		return this.getMatricula().compareTo(otroBus.getMatricula());
 	}
 }
