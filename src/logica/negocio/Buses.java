@@ -50,7 +50,7 @@ public class Buses extends Diccionario<String, Bus> implements Serializable {
 	
 	}		 	
 	public List<VOBusSalida> listarBuses() {
-		//throw new UnsupportedOperationException("Metodo no implementado, aun");
+		
 		Bus bus;
 		Iterator<Bus> iteradorBus = iterador();
 		List<VOBusSalida> busesSalida = new ArrayList<VOBusSalida>();
