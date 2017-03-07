@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import logica.excepciones.CapacidadBusMenorACeroException;
 import logica.negocio.Bus;
 import logica.negocio.Excursion;
 import logica.negocio.TipoBoleto;
@@ -52,7 +53,12 @@ public class PruebasExcursion {
 		Date fechaHoraPartida = FechaHora.obtenerFechaHora(30, 1, 2017, 10, 30);
 		Date fechaHoraRegreso = FechaHora.obtenerFechaHora(30, 1, 2017, 19, 00);
 		BigDecimal precioBase = BigDecimal.valueOf(500);
-		Bus bus = new Bus("BUS1", "Marca 1", 15);
+		Bus bus = null;
+		try {
+			bus = new Bus("BUS1", "Marca 1", 15);
+		} catch (CapacidadBusMenorACeroException e) {
+			e.printStackTrace();
+		}
 		Excursion excursion;
 		boolean resultado;
 		
@@ -107,7 +113,12 @@ public class PruebasExcursion {
 		Date fechaHoraPartida = FechaHora.obtenerFechaHora(26, 2, 2017, 11, 20);
 		Date fechaHoraRegreso = FechaHora.obtenerFechaHora(26, 2, 2017, 20, 10);
 		BigDecimal precioBase = BigDecimal.valueOf(255);
-		Bus bus = new Bus("BUS2", "Marca 2", 30);
+		Bus bus = null;
+		try {
+			bus = new Bus("BUS2", "Marca 2", 30);
+		} catch (CapacidadBusMenorACeroException e) {
+			e.printStackTrace();
+		}
 		VOExcursionEntrada voExcursion = new VOExcursionEntrada(codigo, destino,
 				fechaHoraPartida, fechaHoraRegreso, precioBase);
 		Excursion excursion;
@@ -163,7 +174,12 @@ public class PruebasExcursion {
 		Date fechaHoraPartida = FechaHora.obtenerFechaHora(26, 2, 2017, 11, 20);
 		Date fechaHoraRegreso = FechaHora.obtenerFechaHora(26, 2, 2017, 20, 10);
 		BigDecimal precioBase = BigDecimal.valueOf(255);
-		Bus bus = new Bus("BUS3", "Marca 3", 30);
+		Bus bus = null;
+		try {
+			bus = new Bus("BUS3", "Marca 3", 30);
+		} catch (CapacidadBusMenorACeroException e) {
+			e.printStackTrace();
+		}
 		Excursion excursion;
 		VOBoletoEntrada voBoleto;
 		VOBoletoEspecialEntrada voBoletoEspecial;

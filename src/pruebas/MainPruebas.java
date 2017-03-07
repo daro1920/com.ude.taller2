@@ -1,5 +1,7 @@
 package pruebas;
 
+import logica.negocio.Boletos;
+
 public class MainPruebas {
 	
 	public static void main(String[] args) {
@@ -9,8 +11,13 @@ public class MainPruebas {
 	}
 
 	private static void correrPruebasExcursion() {
-		PruebasExcursion pruebasExcursion = new PruebasExcursion();
-		pruebasExcursion.correrPruebas();
+
+		/*PruebasExcursion pruebasExcursion = new PruebasExcursion();
+		pruebasExcursion.correrPruebas();*/
+
+		PruebasBoletos pruebasBoletos = new PruebasBoletos();
+		pruebasBoletos.correrPruebas();
+
 	} 
 
 }
