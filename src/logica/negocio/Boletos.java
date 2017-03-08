@@ -54,7 +54,7 @@ public class Boletos implements Serializable {
     	boolean esDeTipo = false;
     	
     	if (tipo.equals(TipoBoleto.COMUN)) {
-    		esDeTipo = boleto instanceof Boleto;
+    		esDeTipo = !(boleto instanceof BoletoEspecial);
     	} else if (tipo.equals(TipoBoleto.ESPECIAL)) {
     		esDeTipo = boleto instanceof BoletoEspecial;
     	}
