@@ -39,9 +39,6 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 	}
 	
 //	+ registrarBus(VOBusEntrada. TipoError &) : void
-
-	
-	
 	@Override
 	public void registrarBus(VOBusEntrada voBus)
 			throws RemoteException, YaExisteBusException,
