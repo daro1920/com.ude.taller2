@@ -5,7 +5,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import logica.excepciones.CapacidadBusMenorACeroException;
+import logica.negocio.Boletos;
 import logica.negocio.Bus;
+import logica.negocio.Buses;
 import logica.negocio.Excursion;
 import logica.negocio.Excursiones;
 import logica.negocio.TipoBoleto;
@@ -13,6 +16,7 @@ import logica.valueobjects.VOBoletoEntrada;
 import logica.valueobjects.VOBoletoEspecialEntrada;
 import logica.valueobjects.VOBoletoSalida;
 import logica.valueobjects.VOBusEntrada;
+import logica.valueobjects.VOBusSalida;
 import logica.valueobjects.VOExcursionEntrada;
 import util.FechaHora;
 
@@ -27,6 +31,7 @@ private ImpresoraPruebas impresora;
 public void correrPruebas() {
 		
 		ContadorPruebas contadorGeneral = new ContadorPruebas();
+		Buses buses = new Buses();
 		ContadorPruebas contadorAux;
 		
 		impresora.imprimirEncabezadoGeneral("Pruebas Bus");
@@ -37,8 +42,8 @@ public void correrPruebas() {
 		contadorAux = probarConstructorConVO();
 		contadorGeneral.sumarContador(contadorAux);
 		
-		contadorAux = probarListarBuses();
-		contadorGeneral.sumarContador(contadorAux);
+		probarlistarBuses(buses);
+	
 
 		impresora.imprimirResultadoGeneral("Fin Pruebas Bus", contadorGeneral);
 		
@@ -52,8 +57,9 @@ private ContadorPruebas probarConstructorSinVO() {
 	int capacidad = 15;
 	Bus bus;
 	boolean resultado;
+	Excursiones excursionesAsignadas = new Excursiones();
 	
-	impresora.imprimirEncabezadoSeccion("Bus(matricula, marca, capacidad)");
+	impresora.imprimirEncabezadoSeccion("Bus(matricula, marca, capacidad, excursionesAsignadas)");
 	
 	try {
 		bus = new Bus(matricula, marca, capacidad);
@@ -77,6 +83,9 @@ private ContadorPruebas probarConstructorSinVO() {
 	contador.agregarResultadoPrueba(resultado);
 	impresora.imprimirResultadoIndividual("Prueba 1.3", resultado);
 	
+	resultado = bus.listarExcursionesAsignadas().equals(excursionesAsignadas);
+	contador.agregarResultadoPrueba(resultado);
+	impresora.imprimirResultadoIndividual("Prueba 1.4", resultado);
 	
 	impresora.imprimirResultadoSeccion(contador);
 	 
@@ -90,6 +99,7 @@ private ContadorPruebas probarConstructorConVO() {
 	String matricula = "BUS2";
 	String marca = "Marca 2";
 	int capacidad = 30;
+	Excursiones excursionesAsignadas = new Excursiones();
 	
 	VOBusEntrada voBus = new VOBusEntrada(matricula, marca,capacidad);
 	Bus bus;
@@ -119,46 +129,23 @@ private ContadorPruebas probarConstructorConVO() {
 	contador.agregarResultadoPrueba(resultado);
 	impresora.imprimirResultadoIndividual("Prueba 2.3", resultado);
 	
-
+	resultado = bus.listarExcursionesAsignadas().equals(excursionesAsignadas);
+	contador.agregarResultadoPrueba(resultado);
+	impresora.imprimirResultadoIndividual("Prueba 2.3", resultado);
+	
 	impresora.imprimirResultadoSeccion(contador);
 	 
 	return contador;
 	
 }
 
-private ContadorPruebas probarListarBuses() {
-	
-	ContadorPruebas contador = new ContadorPruebas();
-	String codigo = "BUS3";
-	String destino = "Marca 3";
-	int capacidad = 35;
-	Bus bus = new Bus("BUS3", "Marca 3", 35);
-	Excursion excursion;
-	VOBusEntrada voBusEntrada;
-	
-	boolean resultado;
-	
-	impresora.imprimirEncabezadoSeccion("listarBuses() : List<VOBusSalida>");
-		
-	try {
-		bus = new bus(matricula, destino, fechaHoraPartida, fechaHoraRegreso, precioBase, bus);
-	} catch (Exception e) {
-		impresora.imprimirLinea("Excepcion inesperada:");
-		impresora.imprimirLinea(e.toString());
-		e.printStackTrace();
-		
-		return contador;
-	}
-/*	boletosEntrada = new ArrayList<VOBoletoEntrada>();
-	boletosSalida = excursion.listarBoletos(TipoBoleto.COMUN);
-	resultado = listasEquivalentesOrdenadas(boletosEntrada, boletosSalida);
-	contador.agregarResultadoPrueba(resultado);
-	impresora.imprimirResultadoIndividual("Prueba 3.1", resultado);
-	
-	impresora.imprimirResultadoSeccion(contador);
-	
-	return contador;
-	*/
+private  void probarlistarBuses(Buses buses){
+
+	 java.util.List<VOBusSalida> busesSalida = buses.listarBuses();
+    for (VOBusSalida busS :busesSalida) {
+        System.out.println("Matricula:"+busS.getMatricula()+" Marca:"+busS.getMarca()+"Capacidad:"+
+                busS.getCapacidad()+" CantidadExcursiones:" + busS.getCantidadExcursiones());
+    }
 }
 	
 }
