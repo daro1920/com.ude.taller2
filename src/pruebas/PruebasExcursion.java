@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import logica.excepciones.CapacidadBusMenorACeroException;
+import logica.excepciones.CapacidadInsuficienteException;
 import logica.negocio.Bus;
 import logica.negocio.Excursion;
 import logica.negocio.TipoBoleto;
@@ -56,7 +56,7 @@ public class PruebasExcursion {
 		Bus bus = null;
 		try {
 			bus = new Bus("BUS1", "Marca 1", 15);
-		} catch (CapacidadBusMenorACeroException e) {
+		} catch (CapacidadInsuficienteException e) {
 			e.printStackTrace();
 		}
 		Excursion excursion;
@@ -116,7 +116,7 @@ public class PruebasExcursion {
 		Bus bus = null;
 		try {
 			bus = new Bus("BUS2", "Marca 2", 30);
-		} catch (CapacidadBusMenorACeroException e) {
+		} catch (CapacidadInsuficienteException e) {
 			e.printStackTrace();
 		}
 		VOExcursionEntrada voExcursion = new VOExcursionEntrada(codigo, destino,
@@ -177,7 +177,7 @@ public class PruebasExcursion {
 		Bus bus = null;
 		try {
 			bus = new Bus("BUS3", "Marca 3", 30);
-		} catch (CapacidadBusMenorACeroException e) {
+		} catch (CapacidadInsuficienteException e) {
 			e.printStackTrace();
 		}
 		Excursion excursion;

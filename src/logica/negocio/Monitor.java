@@ -9,7 +9,7 @@ public class Monitor {
 		escribiendo = false;
 	}
 	
-	public void comienzoLectura() {
+	public synchronized void comienzoLectura() {
 		while (escribiendo) {
 			try {
 				wait();
@@ -21,13 +21,13 @@ public class Monitor {
 		cantLectores ++;
 	}
 	
-	public void terminoLectura() {
+	public synchronized void terminoLectura() {
 		cantLectores --;
 		
 		notify();
 	}
 	
-	public void comienzoEscritura() {
+	public synchronized void comienzoEscritura() {
 		while (cantLectores > 0 || escribiendo) {
 			try {
 				wait();
@@ -40,7 +40,7 @@ public class Monitor {
 		escribiendo = true;
 	}
 	
-	public void terminoEscritura() {
+	public synchronized void terminoEscritura() {
 		escribiendo = false;
 		notify();
 	}

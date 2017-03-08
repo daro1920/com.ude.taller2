@@ -16,6 +16,13 @@ public class VOExcursionSalida extends VOExcursionEntrada implements Comparable<
 	public int getAsientosDisponibles() {
 		return this.asientosDisponibles;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null
+				&& obj instanceof VOExcursionSalida
+				&& ((VOExcursionSalida)obj).getCodigo().equals(this.getCodigo());
+	}
 
 	@Override
 	public int compareTo(VOExcursionSalida otraExcursion) {

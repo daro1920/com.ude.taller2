@@ -1,15 +1,11 @@
 package logica.negocio;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
-import logica.excepciones.CapacidadBusMenorACeroException;
-import logica.excepciones.PeriodoInvalidoException;
+import logica.excepciones.CapacidadInsuficienteException;
 import logica.valueobjects.VOBusEntrada;
 import logica.valueobjects.VOBusSalida;
-import logica.valueobjects.VOExcursionEntrada;
 import logica.valueobjects.VOExcursionSalida;
 
 @SuppressWarnings("serial")
@@ -18,16 +14,17 @@ public class Bus implements Serializable {
 	private String matricula;
 	private String marca;
 	private int capacidad;
-	private Excursiones excursionesAsignadas;
+	private Excursiones excursiones;
 
-	public Bus(String matricula,String marca, int capacidad)throws CapacidadBusMenorACeroException {
+	public Bus(String matricula,String marca, int capacidad)throws CapacidadInsuficienteException {
 		if (!(capacidad > 0)) {
-			throw new CapacidadBusMenorACeroException("La capacidad del bus debe de ser mayor a cero");
+			throw new CapacidadInsuficienteException("La capacidad del bus debe de ser mayor a cero");
 		}
 
 		this.matricula = matricula;
 		this.marca = marca;
 		this.capacidad = capacidad;
+		this.excursiones = new Excursiones();
 	}
 
 	public String getMatricula(){
@@ -41,22 +38,22 @@ public class Bus implements Serializable {
 		return capacidad;
 	}
 	
-	public Bus(VOBusEntrada voBus) throws CapacidadBusMenorACeroException {
+	public Bus(VOBusEntrada voBus) throws CapacidadInsuficienteException {
 		this(voBus.getMatricula(), voBus.getMarca(), voBus.getCapacidad());
 	}
 	
 	
 	public int getCantidadExcursiones(){
-		return excursionesAsignadas.tamanio();
+		return excursiones.tamanio();
 	}
 	public List<VOExcursionSalida> listarExcursionesAsignadas(){
-		return excursionesAsignadas.listarExcursiones();
+		return excursiones.listarExcursiones();
 	}
 	public void agregarExcursion(Excursion excursion){
-		excursionesAsignadas.agregar(excursion);
+		excursiones.agregar(excursion);
 	}
 	public void borrarExcursion(String codigo){
-		excursionesAsignadas.quitar(codigo);
+		excursiones.quitar(codigo);
 	}
 	@Override
 	public boolean equals(Object obj ){
@@ -68,7 +65,7 @@ public class Bus implements Serializable {
 	
 	public boolean disponiblePara(Excursion excursion){
 		
-		return excursionesAsignadas.hayColisionCon(excursion);
+		return excursiones.hayColisionCon(excursion);
 	}
 
 	public VOBusSalida voSalida() {

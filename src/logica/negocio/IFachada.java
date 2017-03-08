@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import logica.excepciones.BusInexistenteException;
-import logica.excepciones.CapacidadBusMenorACeroException;
+import logica.excepciones.CapacidadInsuficienteException;
 import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
@@ -26,7 +26,7 @@ public interface IFachada extends Remote {
 	
 	public void registrarBus(VOBusEntrada voBus)
 			throws YaExisteBusException,
-			RemoteException, CapacidadBusMenorACeroException;
+			RemoteException, CapacidadInsuficienteException;
 
 	public List<VOBusSalida> listarBuses() throws RemoteException;
 

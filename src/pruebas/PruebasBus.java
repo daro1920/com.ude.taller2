@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
-import logica.excepciones.CapacidadBusMenorACeroException;
+import logica.excepciones.CapacidadInsuficienteException;
 import logica.negocio.Boletos;
 import logica.negocio.Bus;
 import logica.negocio.Buses;
