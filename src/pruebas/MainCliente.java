@@ -76,8 +76,6 @@ public class MainCliente {
             e.printStackTrace();
         } catch (YaExisteBusException e) {
             e.printStackTrace();
-        } catch (CapacidadBusMenorACeroException e) {
-            e.printStackTrace();
         } catch (PeriodoInvalidoException e) {
             e.printStackTrace();
         } catch (YaExisteExcursionException e) {
@@ -92,10 +90,12 @@ public class MainCliente {
             e.printStackTrace();
         } catch (PersistenciaException e) {
             e.printStackTrace();
+        } catch (CapacidadInsuficienteException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void registrarBuses(IFachada fachada) throws YaExisteBusException, CapacidadBusMenorACeroException, RemoteException {
+    private static void registrarBuses(IFachada fachada) throws YaExisteBusException, RemoteException, CapacidadInsuficienteException {
 
         VOBusEntrada voBusEntrada;
 
