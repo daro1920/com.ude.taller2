@@ -1,24 +1,10 @@
 package pruebas;
 
-import java.awt.List;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-
-import logica.excepciones.CapacidadBusMenorACeroException;
-import logica.negocio.Boletos;
 import logica.negocio.Bus;
 import logica.negocio.Buses;
-import logica.negocio.Excursion;
 import logica.negocio.Excursiones;
-import logica.negocio.TipoBoleto;
-import logica.valueobjects.VOBoletoEntrada;
-import logica.valueobjects.VOBoletoEspecialEntrada;
-import logica.valueobjects.VOBoletoSalida;
 import logica.valueobjects.VOBusEntrada;
 import logica.valueobjects.VOBusSalida;
-import logica.valueobjects.VOExcursionEntrada;
-import util.FechaHora;
 
 public class PruebasBus {
 

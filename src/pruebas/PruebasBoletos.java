@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Created by Dario on 3/6/2017.
- */
 public class PruebasBoletos {
 
     private List<String> ciudades = new ArrayList<String>();
