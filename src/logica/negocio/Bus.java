@@ -65,7 +65,7 @@ public class Bus implements Serializable {
 	
 	public boolean disponiblePara(Excursion excursion){
 		
-		return excursiones.hayColisionCon(excursion);
+		return !excursiones.hayColisionCon(excursion);
 	}
 
 	public VOBusSalida voSalida() {
