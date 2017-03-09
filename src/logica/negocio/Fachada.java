@@ -7,7 +7,7 @@ import java.util.List;
 
 import configuracion.Configuracion;
 import logica.excepciones.BusInexistenteException;
-import logica.excepciones.CapacidadBusMenorACeroException;
+import logica.excepciones.CapacidadInsuficienteException;
 import logica.excepciones.ConfiguracionException;
 import logica.excepciones.NoExisteExcursionException;
 import logica.excepciones.NoHayAsientosDisponiblesException;
@@ -38,11 +38,10 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		monitor = new Monitor();
 	}
 	
-//	+ registrarBus(VOBusEntrada. TipoError &) : void
 	@Override
 	public void registrarBus(VOBusEntrada voBus)
 			throws RemoteException, YaExisteBusException,
-			CapacidadBusMenorACeroException {
+			CapacidadInsuficienteException {
 		
 		monitor.comienzoEscritura();
 		
@@ -55,7 +54,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		
 		try {
 			bus = new Bus(voBus);
-		} catch (CapacidadBusMenorACeroException e) {
+		} catch (CapacidadInsuficienteException e) {
 			monitor.terminoEscritura();
 			throw e;
 		}

@@ -5,3 +5,6 @@ bin/logica/negocio/Excursiones.class
 bin/logica/negocio/Excursiones.class
 bin/logica/negocio/Excursion.class
 bin/logica/negocio/Fachada.class
+*.class
+*.class
+bin/logica/negocio/Boletos.class
