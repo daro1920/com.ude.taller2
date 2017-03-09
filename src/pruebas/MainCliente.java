@@ -35,7 +35,7 @@ public class MainCliente {
 
             initializeValues();
 
-            IFachada fachada = (IFachada) Naming.lookup("//pc00197:1099/Fachada");
+            IFachada fachada = (IFachada) Naming.lookup("//localhost:1099/Fachada");
 
             registrarBuses(fachada);
             registrarExcursion(fachada);
