@@ -85,7 +85,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada {
 		
 		monitor.comienzoLectura();
 		
-		if (!excursiones.contiene(matricula)) {
+		if (!buses.contiene(matricula)) {
 			monitor.terminoLectura();
 			throw new BusInexistenteException("No existe bus");
 		}
