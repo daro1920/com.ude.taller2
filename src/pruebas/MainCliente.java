@@ -108,8 +108,8 @@ public class MainCliente {
             marca = marcas.get(new Random().nextInt(marcas.size()));
             matricula = matriculas.get(new Random().nextInt(matriculas.size()));
             randomNum = ThreadLocalRandom.current().nextInt(20, 90);
-
-            voBusEntrada= new VOBusEntrada(matricula,marca,randomNum);
+System.out.println(matricula+i);
+            voBusEntrada= new VOBusEntrada(matricula+i,marca,randomNum);
             fachada.registrarBus(voBusEntrada);
         }
 
@@ -127,7 +127,8 @@ public class MainCliente {
 
             ciudad = ciudades.get(new Random().nextInt(ciudades.size()));
 
-            voExcursionEntrada= new VOExcursionEntrada(String.valueOf(i),ciudad,new Date(),new Date(),precioBase);
+            voExcursionEntrada= new VOExcursionEntrada(String.valueOf(i),ciudad,new Date(System.currentTimeMillis()),
+                    new Date(System.currentTimeMillis()+1),precioBase);
             fachada.registrarExcursion(voExcursionEntrada);
         }
 
@@ -171,15 +172,15 @@ public class MainCliente {
         marcas.add("Fiat");
         marcas.add("Acura");
 
-        matriculas.add("SAT 983541");
-        matriculas.add("SAT 445562");
-        matriculas.add("SAT 112233");
-        matriculas.add("SAT 141414");
-        matriculas.add("SAT 151687");
-        matriculas.add("SAT 111222");
-        matriculas.add("SAT 333321");
-        matriculas.add("SAT 879546");
-        matriculas.add("SAT 110100");
+        matriculas.add("SAT 98354");
+        matriculas.add("SAT 44556");
+        matriculas.add("SAT 11223");
+        matriculas.add("SAT 14141");
+        matriculas.add("SAT 15168");
+        matriculas.add("SAT 11122");
+        matriculas.add("SAT 33332");
+        matriculas.add("SAT 87954");
+        matriculas.add("SAT 11010");
 
         ciudades.add("Montevideo");
         ciudades.add("Madrid");

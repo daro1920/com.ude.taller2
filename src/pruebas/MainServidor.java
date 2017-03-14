@@ -2,7 +2,6 @@ package pruebas;
 
 import logica.negocio.Fachada;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;

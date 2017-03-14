@@ -1,6 +1,8 @@
 package logica.valueobjects;
 
-public class VOBusEntrada {
+import java.io.Serializable;
+
+public class VOBusEntrada implements Serializable {
 
 private String matricula;
 private String marca;

@@ -1,9 +1,10 @@
 package logica.valueobjects;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class VOExcursionEntrada {
+public class VOExcursionEntrada implements Serializable {
 	
 	private	String 	codigo;
 	private	String	destino;

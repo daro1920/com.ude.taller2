@@ -5,13 +5,8 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
+import logica.excepciones.*;
 import util.FechaHora;
-import logica.excepciones.BusInexistenteException;
-import logica.excepciones.CapacidadInsuficienteException;
-import logica.excepciones.NoHayBusesDisponiblesException;
-import logica.excepciones.PeriodoInvalidoException;
-import logica.excepciones.YaExisteBusException;
-import logica.excepciones.YaExisteExcursionException;
 import logica.negocio.Fachada;
 import logica.valueobjects.VOBusEntrada;
 import logica.valueobjects.VOBusSalida;
@@ -38,9 +33,9 @@ public class PruebasFachada {
 		probarListarBuses(contadorGeneral);
 		probarRegistrarExcursion(contadorGeneral);
 		probarListarExcursionesBus(contadorGeneral);
-//		ReasignarExcursion
-//		Respaldar
-//		Recuperar
+		probarReasignarExcursion(contadorGeneral);
+		probarRespaldar(contadorGeneral);
+		probarRecuperar(contadorGeneral);
 //		VenderBoleto
 //		RecaudacionExcursion
 //		ListarBoletosExcursion
@@ -49,6 +44,119 @@ public class PruebasFachada {
 		
 		impresora.imprimirResultadoGeneral("Fin Pruebas Fachada", contadorGeneral);
 		
+	}
+
+	private void probarRecuperar(ContadorPruebas contadorGeneral){
+		ContadorPruebas contador;
+		try {
+			contador = probarRecuperar();
+			contadorGeneral.sumarContador(contador);
+		} catch (Exception e) {
+			impresora.imprimirLinea("Excepcion inesperada:");
+			impresora.imprimirLinea(e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+
+	private ContadorPruebas probarRecuperar() throws RemoteException {
+
+		boolean resultado;
+		ContadorPruebas contador = new ContadorPruebas();
+
+		impresora.imprimirEncabezadoSeccion("recuperar()");
+
+		Fachada fachada = new Fachada();
+		try {
+			fachada.recuperar();
+			resultado = false;
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+			resultado = false;
+		} catch (ConfiguracionException e) {
+			e.printStackTrace();
+			resultado = false;
+		}
+
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 8.1", resultado);
+
+		return contador;
+	}
+
+	private void probarRespaldar(ContadorPruebas contadorGeneral){
+		ContadorPruebas contador;
+		try {
+			contador = probarRespaldar();
+			contadorGeneral.sumarContador(contador);
+		} catch (Exception e) {
+			impresora.imprimirLinea("Excepcion inesperada:");
+			impresora.imprimirLinea(e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+
+	private ContadorPruebas probarRespaldar() throws RemoteException {
+
+		boolean resultado;
+		ContadorPruebas contador = new ContadorPruebas();
+
+		impresora.imprimirEncabezadoSeccion("respaldar()");
+
+		Fachada fachada = new Fachada();
+		try {
+			fachada.respaldar();
+			resultado = false;
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+			resultado = false;
+		} catch (ConfiguracionException e) {
+			e.printStackTrace();
+			resultado = false;
+		}
+
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 7.1", resultado);
+
+		return contador;
+	}
+
+	private void probarReasignarExcursion(ContadorPruebas contadorGeneral){
+		ContadorPruebas contador;
+		try {
+			contador = probrReasignarExcursion();
+			contadorGeneral.sumarContador(contador);
+		} catch (Exception e) {
+			impresora.imprimirLinea("Excepcion inesperada:");
+			impresora.imprimirLinea(e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+	private ContadorPruebas probrReasignarExcursion() throws RemoteException {
+
+		boolean resultado;
+		ContadorPruebas contador = new ContadorPruebas();
+
+		impresora.imprimirEncabezadoSeccion("reasignarExcursion(VOBusEntrada voBus)");
+
+		Fachada fachada = new Fachada();
+		try {
+			fachada.reasignarExcursion("EX31");
+			resultado = false;
+		} catch (NoExisteExcursionException e) {
+			resultado = false;
+			e.printStackTrace();
+		} catch (NoHayBusesDisponiblesException e) {
+			resultado = true;
+			e.printStackTrace();
+		}
+
+		contador.agregarResultadoPrueba(resultado);
+		impresora.imprimirResultadoIndividual("Prueba 6.1", resultado);
+
+		return contador;
 	}
 
 	private void probarConstructor(ContadorPruebas contadorGeneral) {

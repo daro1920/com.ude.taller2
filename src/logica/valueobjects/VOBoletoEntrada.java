@@ -1,6 +1,8 @@
 package logica.valueobjects;
 
-public class VOBoletoEntrada extends VOBoleto {
+import java.io.Serializable;
+
+public class VOBoletoEntrada extends VOBoleto implements Serializable {
 
     private String codigoExcursion;
 
