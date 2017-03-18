@@ -13,10 +13,10 @@ import swing.RegistroBus;
 
 public class ControladorRegistroBus {
 	
-	private RegistroBus ventana;
+	private RegistrarBus ventana;
 	private IFachada fachada;
 	
-	public ControladorRegistroBus(RegistroBus ventana) {
+	public ControladorRegistroBus(RegistrarBus ventana) {
 		this.ventana = ventana;
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();

@@ -8,10 +8,12 @@ import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListarBuses {
 
-	private JFrame frame;
+	private JFrame frmListarBuses;
 
 	/**
 	 * Launch the application.
@@ -21,7 +23,7 @@ public class ListarBuses {
 			public void run() {
 				try {
 					ListarBuses window = new ListarBuses();
-					window.frame.setVisible(true);
+					window.frmListarBuses.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,31 +42,42 @@ public class ListarBuses {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmListarBuses = new JFrame();
+		frmListarBuses.setTitle("Listar Buses");
+		frmListarBuses.setBounds(100, 100, 581, 223);
+		frmListarBuses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmListarBuses.getContentPane().setLayout(null);
 		
 		JLabel lblListaDeBuses = new JLabel("Listado de Buses: ");
-		lblListaDeBuses.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblListaDeBuses.setBounds(12, 13, 122, 16);
-		frame.getContentPane().add(lblListaDeBuses);
+		lblListaDeBuses.setFont(new Font("Tahoma", Font.BOLD, 13));
+		frmListarBuses.getContentPane().add(lblListaDeBuses);
 		
-		JList list = new JList();
-		list.setBounds(12, 167, 408, -126);
-		frame.getContentPane().add(list);
-		
-		JButton btnListar = new JButton("Listar");
+		JButton btnListar = new JButton("Listar Buses");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnListar.setBounds(12, 123, 137, 25);
 		btnListar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnListar.setForeground(new Color(0, 0, 128));
-		btnListar.setBounds(56, 215, 97, 25);
-		frame.getContentPane().add(btnListar);
+		frmListarBuses.getContentPane().add(btnListar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(418, 123, 118, 25);
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnCancelar.setBounds(262, 216, 97, 25);
-		frame.getContentPane().add(btnCancelar);
+		frmListarBuses.getContentPane().add(btnCancelar);
+		
+		JList list = new JList();
+		list.setBounds(133, 12, 403, 33);
+		frmListarBuses.getContentPane().add(list);
+		
+		JButton btnListarExcursiones = new JButton("Listar Excursiones ");
+		btnListarExcursiones.setForeground(new Color(0, 0, 128));
+		btnListarExcursiones.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnListarExcursiones.setBounds(208, 123, 167, 25);
+		frmListarBuses.getContentPane().add(btnListarExcursiones);
 	}
 
 }

@@ -20,10 +20,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JList;
 
 public class ListarExcursionesEntrePrecios {
 
 	private JFrame frmMenuPrincipal;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -53,45 +58,54 @@ public class ListarExcursionesEntrePrecios {
 	 */
 	private void initialize() {
 		frmMenuPrincipal = new JFrame();
-		frmMenuPrincipal.setTitle("Menu Principal");
+		frmMenuPrincipal.setTitle("Listar Excursiones entre Precios");
 		frmMenuPrincipal.setBounds(100, 100, 669, 300);
 		frmMenuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMenuPrincipal.getContentPane().setLayout(null);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		JLabel lblPrecio = new JLabel("Precio 1:");
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrecio.setBounds(12, 13, 73, 16);
+		frmMenuPrincipal.getContentPane().add(lblPrecio);
+		
+		JLabel lblPrecio_1 = new JLabel("Precio 2:");
+		lblPrecio_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrecio_1.setBounds(226, 13, 99, 16);
+		frmMenuPrincipal.getContentPane().add(lblPrecio_1);
+		
+		textField = new JTextField();
+		textField.setBounds(81, 10, 116, 22);
+		frmMenuPrincipal.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(295, 10, 116, 22);
+		frmMenuPrincipal.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblListadoDeExcursiones = new JLabel("Listado de Excursiones en el rango de precios ingresados:");
+		lblListadoDeExcursiones.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblListadoDeExcursiones.setBounds(12, 57, 392, 16);
+		frmMenuPrincipal.getContentPane().add(lblListadoDeExcursiones);
+		
+		JList list = new JList();
+		list.setBounds(22, 86, 598, 37);
+		frmMenuPrincipal.getContentPane().add(list);
+		
+		JButton btnListar = new JButton("Listar");
+		btnListar.setForeground(new Color(0, 0, 128));
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnListar.setBounds(22, 169, 97, 25);
+		frmMenuPrincipal.getContentPane().add(btnListar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		menuBar.setToolTipText("");
-		frmMenuPrincipal.setJMenuBar(menuBar);
-		
-		JMenu mnRegistrarExcursin = new JMenu("Registrar Excursi\u00F3n");
-		menuBar.add(mnRegistrarExcursin);
-		
-		JMenu mnRegistrarBus = new JMenu("Registrar Bus");
-		menuBar.add(mnRegistrarBus);
-		
-		JMenu mnVenderBoleto = new JMenu("Vender Boleto");
-		menuBar.add(mnVenderBoleto);
-		
-		JMenu mnListarBuses = new JMenu("Listar Buses");
-		menuBar.add(mnListarBuses);
-		
-		JMenu mnListarExcursionesHacia = new JMenu("Listar Excursiones Hacia Destino");
-		menuBar.add(mnListarExcursionesHacia);
-		
-		JMenu mnListarExcursionesEntre = new JMenu("Listar Excursiones entre Precios");
-		menuBar.add(mnListarExcursionesEntre);
-		
-		Button button_1 = new Button("Salir");
-		button_1.setFont(new Font("Arial", Font.BOLD, 12));
-		button_1.setForeground(new Color(0, 102, 204));
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		frmMenuPrincipal.getContentPane().add(button_1, BorderLayout.CENTER);
+		btnCancelar.setForeground(new Color(0, 0, 128));
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnCancelar.setBounds(523, 169, 97, 25);
+		frmMenuPrincipal.getContentPane().add(btnCancelar);
 	}
-
 }
