@@ -126,4 +126,29 @@ public class RegistrarExcursion {
 		btnCancelar.setBounds(262, 231, 131, 44);
 		frame.getContentPane().add(btnCancelar);
 	}
+
+	public void actuarAnteErrorConexion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorConfiguracion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorYaExisteExcursion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorNoHayBusesDisponibles() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorPeriodoInvalido() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
 }

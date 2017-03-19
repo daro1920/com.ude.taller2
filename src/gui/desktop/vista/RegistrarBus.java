@@ -1,15 +1,15 @@
 package gui.desktop.vista;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JSpinner;
-import java.awt.List;
-import javax.swing.JButton;
-import java.awt.Color;
+import javax.swing.JTextField;
 
 public class RegistrarBus {
 
@@ -98,5 +98,25 @@ public class RegistrarBus {
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(201, 216, 101, 25);
 		frame.getContentPane().add(btnCancelar);
+	}
+
+	public void actuarAnteErrorConexion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");	
+	}
+
+	public void actuarAnteErrorConfiguracion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteCapacidadInsuficiente() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteBusYaExistente() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
 	}
 }
