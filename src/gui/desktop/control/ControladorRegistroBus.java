@@ -13,10 +13,10 @@ import swing.RegistroBus;
 
 public class ControladorRegistroBus {
 	
-	private RegistrarBus ventana;
+	private RegistroBus ventana;
 	private IFachada fachada;
 	
-	public ControladorRegistroBus(RegistrarBus ventana) {
+	public ControladorRegistroBus(RegistroBus ventana) {
 		this.ventana = ventana;
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
@@ -27,13 +27,14 @@ public class ControladorRegistroBus {
 		}
 	}
 	
-	public void registrarBus(String matricula, String marca, String capacidad) {
+	public void registrarBus(String matricula, String marca, int capacidad) {
+
+		VOBusEntrada voBus = new VOBusEntrada(matricula, marca, capacidad);
+		
 		try {
-			int capacidadNro = Integer.parseInt(capacidad);
-			VOBusEntrada voBus = new VOBusEntrada(matricula, marca, capacidadNro);
 			fachada.registrarBus(voBus);
-		} catch (NumberFormatException | CapacidadInsuficienteException e) {
-			ventana.actuarAnteCapacidadInvalida();
+		} catch (CapacidadInsuficienteException e) {
+			ventana.actuarAnteCapacidadInsuficiente();
 		} catch (YaExisteBusException e) {
 			ventana.actuarAnteBusYaExistente();
 		} catch (RemoteException e) {
