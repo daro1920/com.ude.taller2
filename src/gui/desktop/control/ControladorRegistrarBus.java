@@ -1,5 +1,7 @@
 package gui.desktop.control;
 
+import gui.desktop.vista.RegistrarBus;
+
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -9,14 +11,13 @@ import logica.excepciones.ConfiguracionException;
 import logica.excepciones.YaExisteBusException;
 import logica.negocio.IFachada;
 import logica.valueobjects.VOBusEntrada;
-import swing.RegistroBus;
 
-public class ControladorRegistroBus {
+public class ControladorRegistrarBus {
 	
-	private RegistroBus ventana;
+	private RegistrarBus ventana;
 	private IFachada fachada;
 	
-	public ControladorRegistroBus(RegistroBus ventana) {
+	public ControladorRegistrarBus(RegistrarBus ventana) {
 		this.ventana = ventana;
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();

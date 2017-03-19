@@ -1,5 +1,7 @@
 package gui.desktop.control;
 
+import gui.desktop.vista.RegistrarExcursion;
+
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -12,7 +14,6 @@ import logica.excepciones.PeriodoInvalidoException;
 import logica.excepciones.YaExisteExcursionException;
 import logica.negocio.IFachada;
 import logica.valueobjects.VOExcursionEntrada;
-import swing.RegistrarExcursion;
 
 public class ControladorRegistrarExcursion {
 	

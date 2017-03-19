@@ -1,4 +1,4 @@
-package swing;
+package gui.desktop.vista;
 
 import java.awt.EventQueue;
 
