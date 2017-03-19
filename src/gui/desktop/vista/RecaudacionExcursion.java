@@ -80,4 +80,19 @@ public class RecaudacionExcursion {
 		textField.setColumns(10);
 	}
 
+	public void actuarAnteErrorConexion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorConfiguracion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorNoExisteExcursion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
 }

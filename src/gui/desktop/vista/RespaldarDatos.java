@@ -58,4 +58,19 @@ public class RespaldarDatos {
 		frmRespaldarDatos.getContentPane().add(btnCancelar);
 	}
 
+	public void actuarAnteErrorConexion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorConfiguracion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorPersistencia() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
 }

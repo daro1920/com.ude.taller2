@@ -123,4 +123,14 @@ public class VenderBoleto {
 		btnCancelar.setBounds(258, 236, 125, 34);
 		frame.getContentPane().add(btnCancelar);
 	}
+
+	public void actuarAnteErrorConexion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
+
+	public void actuarAnteErrorConfiguracion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("No implementado, aun");
+	}
 }
