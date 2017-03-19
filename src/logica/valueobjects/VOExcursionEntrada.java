@@ -6,6 +6,10 @@ import java.util.Date;
 
 public class VOExcursionEntrada implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private	String 	codigo;
 	private	String	destino;
 	private Date	fechaHoraPartida;
@@ -26,20 +30,41 @@ public class VOExcursionEntrada implements Serializable {
 		return codigo;
 	}
 
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 	public String getDestino() {
 		return destino;
+	}
+
+	public void setDestino(String destino) {
+		this.destino = destino;
 	}
 
 	public Date getFechaHoraPartida() {
 		return fechaHoraPartida;
 	}
 
+	public void setFechaHoraPartida(Date fechaHoraPartida) {
+		this.fechaHoraPartida = fechaHoraPartida;
+	}
+
 	public Date getFechaHoraRegreso() {
 		return fechaHoraRegreso;
 	}
-	
-	public BigDecimal getPrecioBase() {
-		return this.precioBase;
+
+	public void setFechaHoraRegreso(Date fechaHoraRegreso) {
+		this.fechaHoraRegreso = fechaHoraRegreso;
 	}
+
+	public BigDecimal getPrecioBase() {
+		return precioBase;
+	}
+
+	public void setPrecioBase(BigDecimal precioBase) {
+		this.precioBase = precioBase;
+	}
+
 	
 }

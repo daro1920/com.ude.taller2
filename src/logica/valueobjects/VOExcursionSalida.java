@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class VOExcursionSalida extends VOExcursionEntrada implements Comparable<VOExcursionSalida> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int asientosDisponibles;
 	
 	public VOExcursionSalida(String codigo, String destino, Date fechaHoraPartida,
@@ -13,10 +17,20 @@ public class VOExcursionSalida extends VOExcursionEntrada implements Comparable<
 		this.asientosDisponibles = asientosDisponibles;
 	}
 	
-	public int getAsientosDisponibles() {
-		return this.asientosDisponibles;
-	}
 	
+	
+	public int getAsientosDisponibles() {
+		return asientosDisponibles;
+	}
+
+
+
+	public void setAsientosDisponibles(int asientosDisponibles) {
+		this.asientosDisponibles = asientosDisponibles;
+	}
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		return obj != null

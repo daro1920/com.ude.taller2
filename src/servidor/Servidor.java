@@ -25,8 +25,10 @@ public class Servidor {
 			LocateRegistry.createRegistry(1099);
 			// instancio mi Objeto Remoto y lo publico
 			Fachada fachada = new Fachada();
+			System.out.println("Antes de publicar");
 			Naming.rebind("//" + ipServidor + ":" + puertoServidor + "/fachada", fachada);
-
+            System.out.println("Luego de publicar");
+            
 		} catch (ConfiguracionException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
