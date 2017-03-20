@@ -107,10 +107,12 @@ public class RegistrarExcursion {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("Registrar Excursi\u00F3n");
-		frame.setBounds(100, 100, 415, 270);
+		frame.setBounds(100, 100, 400, 270);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -131,7 +133,7 @@ public class RegistrarExcursion {
 		frame.getContentPane().add(lblPrecioBase);
 		
 		textFieldCodigo = new JTextField();
-		textFieldCodigo.setBounds(210, 10, 175, 22);
+		textFieldCodigo.setBounds(210, 10, 172, 22);
 		frame.getContentPane().add(textFieldCodigo);
 		textFieldCodigo.setColumns(10);
 		
@@ -141,11 +143,11 @@ public class RegistrarExcursion {
 		
 		spinnerPrecioBase = new JSpinner();
 		spinnerPrecioBase.setModel(new SpinnerNumberModel(new Double(1), new Double(1), null, new Double(1)));
-		spinnerPrecioBase.setBounds(210, 126, 175, 22);
+		spinnerPrecioBase.setBounds(210, 126, 172, 22);
 		frame.getContentPane().add(spinnerPrecioBase);
 		
 		textFieldDestino = new JTextField();
-		textFieldDestino.setBounds(210, 39, 175, 22);
+		textFieldDestino.setBounds(210, 39, 172, 22);
 		frame.getContentPane().add(textFieldDestino);
 		textFieldDestino.setColumns(10);
 		
@@ -154,11 +156,11 @@ public class RegistrarExcursion {
 		frame.getContentPane().add(lblRegresoddmmyyyy);
 		
 		formattedTextFieldPartida = new JFormattedTextField(formatoFechaHora);
-		formattedTextFieldPartida.setBounds(210, 68, 175, 22);
+		formattedTextFieldPartida.setBounds(210, 68, 172, 22);
 		frame.getContentPane().add(formattedTextFieldPartida);
 		
 		formattedTextFieldRegreso = new JFormattedTextField(formatoFechaHora);
-		formattedTextFieldRegreso.setBounds(210, 97, 175, 22);
+		formattedTextFieldRegreso.setBounds(210, 97, 172, 22);
 		frame.getContentPane().add(formattedTextFieldRegreso);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -167,7 +169,7 @@ public class RegistrarExcursion {
 				btnRegistrarActionPerformed(e);
 			}
 		});
-		btnRegistrar.setBounds(12, 184, 97, 25);
+		btnRegistrar.setBounds(12, 197, 97, 25);
 		frame.getContentPane().add(btnRegistrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -176,7 +178,7 @@ public class RegistrarExcursion {
 				btnCancelarActionPerformed(e);
 			}
 		});
-		btnCancelar.setBounds(288, 184, 97, 25);
+		btnCancelar.setBounds(285, 197, 97, 25);
 		frame.getContentPane().add(btnCancelar);
 		
 		JLabel labelCamposObligatorios = new JLabel("(*) Campos obligatorios");
