@@ -25,7 +25,7 @@ public class ControladorVenderBoleto {
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			ventana.actuarAnteErrorConexion();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	

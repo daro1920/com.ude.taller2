@@ -1,13 +1,21 @@
 package gui.desktop.vista;
 
+import gui.desktop.control.ControladorRespaldarDatos;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class RespaldarDatos {
+	
+	private ControladorRespaldarDatos controlador;
+	private boolean inicioFallido;
 
 	private JFrame frame;
 
@@ -45,16 +53,34 @@ public class RespaldarDatos {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnRespaldarDatos = new JButton("Respaldar Datos");
+		btnRespaldarDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnRespaldarActionPerformed(e);
+			}
+		});
 		btnRespaldarDatos.setForeground(new Color(0, 0, 128));
 		btnRespaldarDatos.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRespaldarDatos.setBounds(12, 45, 167, 25);
 		frame.getContentPane().add(btnRespaldarDatos);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnCancelarActionPerformed(e);
+			}
+		});
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCancelar.setBounds(237, 45, 167, 25);
 		frame.getContentPane().add(btnCancelar);
+	}
+	
+	private void btnRespaldarActionPerformed(ActionEvent e) {
+		controlador.respaldarDatos();
+	}
+
+	private void btnCancelarActionPerformed(ActionEvent e) {
+    	frame.dispose();
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
@@ -62,19 +88,28 @@ public class RespaldarDatos {
 		frame.setVisible(visible);
 	}
 
-	public void actuarAnteErrorConexion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
+	public void actuarAnteErrorConexionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void actuarAnteErrorConfiguracion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible cargar la configuración.",
+                "Error de configuración",
+                JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void actuarAnteErrorPersistencia() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "Hubo un error al respaldar.",
+                "Error de persistencia",
+                JOptionPane.ERROR_MESSAGE);
 	}
 
 }

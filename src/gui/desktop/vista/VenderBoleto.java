@@ -80,7 +80,7 @@ public class VenderBoleto {
                 JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void actuarAnteErrorConexionMetodo() {
+	public void actuarAnteErrorConexion() {
 		JOptionPane.showMessageDialog(frame,
                 "No fue posible conectarse al servidor.\n"
                 + "Intentelo más tarde",
