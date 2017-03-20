@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 
 public class MenuPrincipal {
 
-	private JFrame frame;
+	private JFrame frmExcursionesDelDiablo;
 
 	/**
 	 * Launch the application.
@@ -22,7 +22,7 @@ public class MenuPrincipal {
 			public void run() {
 				try {
 					MenuPrincipal window = new MenuPrincipal();
-					window.frame.setVisible(true);
+					window.frmExcursionesDelDiablo.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,13 +41,14 @@ public class MenuPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setForeground(new Color(224, 255, 255));
-		frame.setBounds(100, 100, 700, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmExcursionesDelDiablo = new JFrame();
+		frmExcursionesDelDiablo.setTitle("Excursiones del Diablo");
+		frmExcursionesDelDiablo.getContentPane().setForeground(new Color(224, 255, 255));
+		frmExcursionesDelDiablo.setBounds(100, 100, 700, 500);
+		frmExcursionesDelDiablo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		frmExcursionesDelDiablo.setJMenuBar(menuBar);
 		
 		JMenu mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
@@ -148,12 +149,12 @@ public class MenuPrincipal {
 			}
 		});
 		mnListadosYConsultas.add(mntmExcursionesEntrePrecios);
-		frame.getContentPane().setLayout(null);
+		frmExcursionesDelDiablo.getContentPane().setLayout(null);
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
-		frame.setVisible(visible);
+		frmExcursionesDelDiablo.setVisible(visible);
 	}
 	
     // #########################################################################

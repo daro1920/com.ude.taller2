@@ -1,46 +1,50 @@
 package gui.desktop.vista;
 
-import gui.desktop.control.ControladorListarBuses;
+import gui.desktop.control.ControladorListarExcursionesBus;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import logica.valueobjects.VOBusSalida;
+import logica.valueobjects.VOExcursionSalida;
 
-public class ListarBuses {
+public class ListarExcursionesBus {
 	
-	private ControladorListarBuses controlador;
+	private String matricula;
+	
+	private ControladorListarExcursionesBus controlador;
 	private boolean inicioFallido;
 
-	private JFrame 		frame;
-	private JButton 	btnRefrescar;
-	private JButton 	btnCancelar;
-	private JButton 	btnListarExcursiones;
-	private JScrollPane scrollPaneBuses;
-	private JTable 		tableBuses;
+	private JFrame frame;
+	private JTable tableExcursiones;
 
 	/**
 	 * Create the application.
 	 */
-	public ListarBuses() {
+	@SuppressWarnings("unused")
+	private ListarExcursionesBus() {
+	}
+	
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public ListarExcursionesBus(String matricula) {
 		initialize();
+		
+		this.matricula = matricula;
+		
 		inicioFallido = false;
-		this.controlador = new ControladorListarBuses(this);
+		this.controlador = new ControladorListarExcursionesBus(this);
 		if (!inicioFallido) {
-			refrescarTablaBuses();
+			refrescarTablaExcursiones();
 		}
 	}
 	
@@ -72,6 +76,13 @@ public class ListarBuses {
                 JOptionPane.ERROR_MESSAGE);
 	}
 
+	public void actuarAnteErrorBusInexistente() {
+		JOptionPane.showMessageDialog(frame,
+                "No existe Bus",
+                "Bus inexistente",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
 	// #########################################################################
     // # INITIALIZE Y SET VISIBLE                                              #
     // #########################################################################
@@ -81,45 +92,34 @@ public class ListarBuses {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("Buses");
 		frame.setBounds(100, 100, 700, 500);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		btnRefrescar = new JButton("Refrescar");
+		JButton btnRefrescar = new JButton("Refrescar");
 		btnRefrescar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnRefrescarActionPerformed(e);
 			}
 		});
-		btnRefrescar.setBounds(503, 13, 167, 25);
+		btnRefrescar.setBounds(560, 13, 110, 25);
 		frame.getContentPane().add(btnRefrescar);
 		
-		btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnCancelarActionPerformed(e);
 			}
 		});
-		btnCancelar.setBounds(503, 415, 167, 25);
+		btnCancelar.setBounds(560, 415, 110, 25);
 		frame.getContentPane().add(btnCancelar);
 		
-		btnListarExcursiones = new JButton("Listar Excursiones ");
-		btnListarExcursiones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnListarExcursionesActionPerformed(e);
-			}
-		});
-		btnListarExcursiones.setBounds(503, 51, 167, 25);
-		frame.getContentPane().add(btnListarExcursiones);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 13, 536, 427);
+		frame.getContentPane().add(scrollPane);
 		
-		scrollPaneBuses = new JScrollPane();
-		scrollPaneBuses.setBounds(12, 13, 479, 427);
-		frame.getContentPane().add(scrollPaneBuses);
-		
-		tableBuses = new JTable();
-		scrollPaneBuses.setViewportView(tableBuses);
-		tableBuses.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableExcursiones = new JTable();
+		scrollPane.setViewportView(tableExcursiones);
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
@@ -136,22 +136,7 @@ public class ListarBuses {
     // #########################################################################
 
 	private void btnRefrescarActionPerformed(ActionEvent e) {
-		refrescarTablaBuses();
-	}
-
-	private void btnListarExcursionesActionPerformed(ActionEvent e) {
-		if (hayBusSeleccionado()) {
-			String matricula = obtenerMatriculaBusSeleccionado();
-			
-			ListarExcursionesBus ventana = new ListarExcursionesBus(matricula);
-			ventana.setVisible(true);
-		} else {
-			JOptionPane.showMessageDialog(frame,
-					"Debe seleccionar un Bus.",
-	                "No hay buses seleccionados",
-	                JOptionPane.ERROR_MESSAGE);
-		}
-		
+		refrescarTablaExcursiones();
 	}
 
 	private void btnCancelarActionPerformed(ActionEvent e) {
@@ -163,20 +148,26 @@ public class ListarBuses {
     // #########################################################################
 	
 	@SuppressWarnings("serial")
-	private void refrescarTablaBuses() {
-		List<VOBusSalida> buses = controlador.listadoBuses();
-		String[] encabezados = {"Matrícula", "Marca", "Capacidad", "Cant. Excursiones"};
-		String[][] datos = new String[buses.size()][];
+	private void refrescarTablaExcursiones() {
+		List<VOExcursionSalida> excursiones = controlador.listadoExcursionesBus(matricula);
+		String[] encabezados = {"Código", "Destino", "Partida", "Regreso", "Precio base", "Asientos Disp."};
+		String[][] datos = new String[excursiones.size()][];
 		int index = 0;
+		SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
+		String fechaHoraPartida;
+		String fechaHoraRegreso;
 		
-		for (VOBusSalida bus : buses) {
-			datos[index] = new String[]{bus.getMatricula(), bus.getMarca(),
-					bus.getCapacidad() + "", bus.getCantidadExcursiones() + ""};
+		for (VOExcursionSalida excursion : excursiones) { 
+			fechaHoraPartida = formatoFechaHora.format(excursion.getFechaHoraPartida());
+			fechaHoraRegreso = formatoFechaHora.format(excursion.getFechaHoraRegreso());
+			datos[index] = new String[]{excursion.getCodigo(), excursion.getDestino(),
+					fechaHoraPartida, fechaHoraRegreso, excursion.getPrecioBase().toPlainString(),
+					excursion.getAsientosDisponibles() + ""};
 			
 			index ++;
 		}
 		
-		tableBuses.setModel(new DefaultTableModel(datos, encabezados) {
+		tableExcursiones.setModel(new DefaultTableModel(datos, encabezados) {
             // Evita que se puedan editar las celdas.
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -184,20 +175,5 @@ public class ListarBuses {
             }
         });
 		
-	}
-
-	private boolean hayBusSeleccionado() {
-		return tableBuses.getSelectedRow() != -1;
-	}
-
-	private String obtenerMatriculaBusSeleccionado() {
-		String matricula = null;
-		int index = tableBuses.getSelectedRow();
-		
-		if (index != -1) {
-			matricula = (String)tableBuses.getModel().getValueAt(index, 0);
-		}
-		
-		return matricula;
 	}
 }

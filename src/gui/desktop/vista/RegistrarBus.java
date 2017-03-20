@@ -20,7 +20,7 @@ public class RegistrarBus {
 	private ControladorRegistrarBus controlador;
 	private boolean inicioFallido;
 
-	private JFrame frame;
+	private JFrame frmRegistrarBus;
 	private JTextField textFieldMatricula;
 	private JTextField textFieldMarca;
 	private JSpinner spinnerCapacidad;
@@ -39,7 +39,7 @@ public class RegistrarBus {
     // #########################################################################
 
 	public void notificarRegistroExitoso() {
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
             "Bus registrado con exito.",
             "Registro exitoso",
             JOptionPane.INFORMATION_MESSAGE);
@@ -47,7 +47,7 @@ public class RegistrarBus {
 
 	public void actuarAnteErrorConexionInicial() {
 		inicioFallido = true;
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
                 "No fue posible conectarse al servidor.",
                 "Error de conexión",
                 JOptionPane.ERROR_MESSAGE);
@@ -55,14 +55,14 @@ public class RegistrarBus {
 
 	public void actuarAnteErrorConfiguracionInicial() {
 		inicioFallido = true;
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
                 "No fue posible cargar la configuración.",
                 "Error de configuración",
                 JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void actuarAnteErrorConexionMetodo() {
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
                 "No fue posible conectarse al servidor.\n"
                 + "Intentelo más tarde",
                 "Error de conexión",
@@ -70,62 +70,63 @@ public class RegistrarBus {
 	}
 
 	public void actuarAnteCapacidadInsuficiente() {
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
                 "La capacidad debe ser mayor a cero.",
                 "Capacidad insuficiente",
                 JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void actuarAnteBusYaExistente() {
-		JOptionPane.showMessageDialog(frame,
+		JOptionPane.showMessageDialog(frmRegistrarBus,
                 "Ya existe un bus con la misma matrícula.",
                 "Bus ya existente",
                 JOptionPane.ERROR_MESSAGE);
 	}
 	
     // #########################################################################
-    // # INITIALIZE                                                            #
+    // # INITIALIZE Y SET VISIBLE                                              #
     // #########################################################################
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 350, 210);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmRegistrarBus = new JFrame();
+		frmRegistrarBus.setTitle("Registrar Bus");
+		frmRegistrarBus.setResizable(false);
+		frmRegistrarBus.setBounds(100, 100, 350, 210);
+		frmRegistrarBus.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmRegistrarBus.getContentPane().setLayout(null);
 		
 		JLabel lblMatricula = new JLabel("Matr\u00EDcula *");
 		lblMatricula.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblMatricula.setBounds(12, 13, 78, 16);
-		frame.getContentPane().add(lblMatricula);
+		frmRegistrarBus.getContentPane().add(lblMatricula);
 		
 		JLabel lblMarca = new JLabel("Marca *");
 		lblMarca.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblMarca.setBounds(12, 42, 56, 16);
-		frame.getContentPane().add(lblMarca);
+		frmRegistrarBus.getContentPane().add(lblMarca);
 		
 		JLabel lblCapacidad = new JLabel("Capacidad *");
 		lblCapacidad.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblCapacidad.setBounds(12, 71, 78, 16);
-		frame.getContentPane().add(lblCapacidad);
+		frmRegistrarBus.getContentPane().add(lblCapacidad);
 		
 		textFieldMatricula = new JTextField();
 		textFieldMatricula.setBounds(102, 10, 230, 22);
-		frame.getContentPane().add(textFieldMatricula);
+		frmRegistrarBus.getContentPane().add(textFieldMatricula);
 		textFieldMatricula.setColumns(10);
 		
 		textFieldMarca = new JTextField();
 		textFieldMarca.setBounds(102, 39, 230, 22);
-		frame.getContentPane().add(textFieldMarca);
+		frmRegistrarBus.getContentPane().add(textFieldMarca);
 		textFieldMarca.setColumns(10);
 		
 		spinnerCapacidad = new JSpinner();
 		spinnerCapacidad.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spinnerCapacidad.setBounds(102, 68, 48, 22);
-		frame.getContentPane().add(spinnerCapacidad);
+		frmRegistrarBus.getContentPane().add(spinnerCapacidad);
 		
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
@@ -136,7 +137,7 @@ public class RegistrarBus {
 		btnRegistrar.setForeground(new Color(0, 0, 128));
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnRegistrar.setBounds(12, 137, 101, 25);
-		frame.getContentPane().add(btnRegistrar);
+		frmRegistrarBus.getContentPane().add(btnRegistrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -147,19 +148,19 @@ public class RegistrarBus {
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(231, 137, 101, 25);
-		frame.getContentPane().add(btnCancelar);
+		frmRegistrarBus.getContentPane().add(btnCancelar);
 		
 		JLabel lblObligatorios = new JLabel("(*) Campos obligatorios");
 		lblObligatorios.setBounds(12, 100, 308, 16);
-		frame.getContentPane().add(lblObligatorios);
+		frmRegistrarBus.getContentPane().add(lblObligatorios);
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
 		if (inicioFallido) {
-			frame.dispose();
+			frmRegistrarBus.dispose();
 		} else {
-			frame.setVisible(visible);
+			frmRegistrarBus.setVisible(visible);
 		}
 	}
 
@@ -174,7 +175,7 @@ public class RegistrarBus {
 			int capacidad = (Integer) spinnerCapacidad.getValue();
 			controlador.registrarBus(matricula, marca, capacidad);
 		} else {
-			JOptionPane.showMessageDialog(frame,
+			JOptionPane.showMessageDialog(frmRegistrarBus,
                     "Los campos marcados con asterisco (*) son obligatorios.",
                     "Faltan campos obligatorios",
                     JOptionPane.ERROR_MESSAGE);
@@ -182,7 +183,7 @@ public class RegistrarBus {
 	}
 
 	private void btnCancelarActionPerformed(ActionEvent e) {
-    	frame.dispose();
+    	frmRegistrarBus.dispose();
 	}
 	
     // #########################################################################
