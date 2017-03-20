@@ -92,6 +92,7 @@ public class ListarExcursionesBus {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -102,7 +103,7 @@ public class ListarExcursionesBus {
 				btnRefrescarActionPerformed(e);
 			}
 		});
-		btnRefrescar.setBounds(560, 13, 110, 25);
+		btnRefrescar.setBounds(572, 13, 110, 25);
 		frame.getContentPane().add(btnRefrescar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -111,11 +112,11 @@ public class ListarExcursionesBus {
 				btnCancelarActionPerformed(e);
 			}
 		});
-		btnCancelar.setBounds(560, 415, 110, 25);
+		btnCancelar.setBounds(572, 427, 110, 25);
 		frame.getContentPane().add(btnCancelar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 536, 427);
+		scrollPane.setBounds(12, 13, 548, 439);
 		frame.getContentPane().add(scrollPane);
 		
 		tableExcursiones = new JTable();

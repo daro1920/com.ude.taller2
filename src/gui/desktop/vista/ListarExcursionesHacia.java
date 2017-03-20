@@ -1,88 +1,164 @@
 package gui.desktop.vista;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import gui.desktop.control.ControladorListarExcursionesHacia;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import logica.valueobjects.VOExcursionSalida;
 
 public class ListarExcursionesHacia {
+	
+	private ControladorListarExcursionesHacia controlador;
+	boolean inicioFallido;
 
 	private JFrame frame;
-	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListarExcursionesHacia window = new ListarExcursionesHacia();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTextField textFieldDestino;
+	private JTable tableExcursiones;
 
 	/**
 	 * Create the application.
 	 */
 	public ListarExcursionesHacia() {
 		initialize();
+		
+		inicioFallido = false;
+		this.controlador = new ControladorListarExcursionesHacia(this);
+		if (!inicioFallido) {
+			refrescarTablaExcursiones();
+		}
 	}
+	
+    // #########################################################################
+    // # METODOS PUBLICOS                                                      #
+    // #########################################################################
+
+	public void actuarAnteErrorConexionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorConfiguracionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible cargar la configuración.",
+                "Error de configuración",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorConexionMetodo() {
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.\n"
+                + "Intentelo más tarde",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	// #########################################################################
+    // # INITIALIZE Y SET VISIBLE                                              #
+    // #########################################################################
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("Listado de Excursiones hacia Destino");
-		frame.setBounds(100, 100, 787, 300);
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblIngreseElDestino = new JLabel("Ingrese el Destino:");
-		lblIngreseElDestino.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblIngreseElDestino.setBounds(12, 31, 135, 16);
-		frame.getContentPane().add(lblIngreseElDestino);
+		JLabel lblDestino = new JLabel("Destino");
+		lblDestino.setBounds(12, 13, 56, 16);
+		frame.getContentPane().add(lblDestino);
 		
-		textField = new JTextField();
-		textField.setBounds(145, 28, 155, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldDestino = new JTextField();
+		textFieldDestino.setBounds(80, 10, 493, 22);
+		frame.getContentPane().add(textFieldDestino);
+		textFieldDestino.setColumns(10);
 		
-		JLabel lblListadoDeExcursiones = new JLabel("Listado de excursiones:");
-		lblListadoDeExcursiones.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblListadoDeExcursiones.setBounds(12, 74, 155, 16);
-		frame.getContentPane().add(lblListadoDeExcursiones);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 42, 670, 410);
+		frame.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
-		list.setBounds(179, 73, 566, 45);
-		frame.getContentPane().add(list);
+		tableExcursiones = new JTable();
+		scrollPane.setViewportView(tableExcursiones);
 		
-		JButton btnListar = new JButton("Listar");
-		btnListar.setForeground(new Color(0, 0, 128));
-		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnListar.setBounds(50, 184, 97, 25);
-		frame.getContentPane().add(btnListar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setForeground(new Color(0, 0, 128));
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnCancelar.setBounds(535, 184, 97, 25);
-		frame.getContentPane().add(btnCancelar);
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnConsultarActionPerformed(e);
+			}
+		});
+		btnConsultar.setBounds(585, 9, 97, 25);
+		frame.getContentPane().add(btnConsultar);
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
-		frame.setVisible(visible);
+		if (inicioFallido) {
+			frame.dispose();
+		} else {
+			frame.setVisible(visible);
+		}
+	}
+	
+	// #########################################################################
+    // # EVENT HANDLERS                                                        #
+    // #########################################################################
+
+	private void btnConsultarActionPerformed(ActionEvent e) {
+		refrescarTablaExcursiones();
+	}
+	
+    // #########################################################################
+    // # METODOS AUXILIARES                                                    #
+    // #########################################################################
+	
+	@SuppressWarnings("serial")
+	private void refrescarTablaExcursiones() {
+		String destino = textFieldDestino.getText();
+		List<VOExcursionSalida> excursiones = controlador.listadoExcursionesHacia(destino);
+		String[] encabezados = {"Código", "Destino", "Partida", "Regreso", "Precio base", "Asientos Disp."};
+		String[][] datos = new String[excursiones.size()][];
+		int index = 0;
+		SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String fechaHoraPartida;
+		String fechaHoraRegreso;
+		
+		for (VOExcursionSalida excursion : excursiones) { 
+			fechaHoraPartida = formatoFechaHora.format(excursion.getFechaHoraPartida());
+			fechaHoraRegreso = formatoFechaHora.format(excursion.getFechaHoraRegreso());
+			datos[index] = new String[]{excursion.getCodigo(), excursion.getDestino(),
+					fechaHoraPartida, fechaHoraRegreso, excursion.getPrecioBase().toPlainString(),
+					excursion.getAsientosDisponibles() + ""};
+			
+			index ++;
+		}
+		
+		tableExcursiones.setModel(new DefaultTableModel(datos, encabezados) {
+            // Evita que se puedan editar las celdas.
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+		
 	}
 
 }
