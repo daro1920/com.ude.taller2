@@ -151,6 +151,15 @@ public class MenuPrincipal {
 		frame.getContentPane().setLayout(null);
 	}
 
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
+	}
+	
+    // #########################################################################
+    // # EVENT HANDLERS                                                        #
+    // #########################################################################
+
 	private void mntmRespaldarActionPerformed(ActionEvent e) {
 		RespaldarDatos ventana = new RespaldarDatos();
 		ventana.setVisible(true);
@@ -205,5 +214,9 @@ public class MenuPrincipal {
 		ListarExcursionesEntrePrecios ventana = new ListarExcursionesEntrePrecios();
 		ventana.setVisible(true);
 	}
+	
+    // #########################################################################
+    // # FIN EVENT HANDLERS                                                    #
+    // #########################################################################
 	
 }

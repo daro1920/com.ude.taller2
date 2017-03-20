@@ -22,9 +22,9 @@ public class ControladorRegistrarBus {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	
@@ -34,12 +34,13 @@ public class ControladorRegistrarBus {
 		
 		try {
 			fachada.registrarBus(voBus);
+			ventana.notificarRegistroExitoso();
 		} catch (CapacidadInsuficienteException e) {
 			ventana.actuarAnteCapacidadInsuficiente();
 		} catch (YaExisteBusException e) {
 			ventana.actuarAnteBusYaExistente();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionMetodo();
 		}
 	}
 
