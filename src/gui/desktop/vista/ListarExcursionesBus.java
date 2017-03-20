@@ -93,7 +93,7 @@ public class ListarExcursionesBus {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnRefrescar = new JButton("Refrescar");
@@ -153,7 +153,7 @@ public class ListarExcursionesBus {
 		String[] encabezados = {"Código", "Destino", "Partida", "Regreso", "Precio base", "Asientos Disp."};
 		String[][] datos = new String[excursiones.size()][];
 		int index = 0;
-		SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
+		SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String fechaHoraPartida;
 		String fechaHoraRegreso;
 		

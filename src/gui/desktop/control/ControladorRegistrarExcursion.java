@@ -25,9 +25,9 @@ public class ControladorRegistrarExcursion {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	
@@ -39,8 +39,9 @@ public class ControladorRegistrarExcursion {
 		
 		try {
 			fachada.registrarExcursion(voExcursion);
+			ventana.notificarRegistroExitoso();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionMetodo();
 		} catch (YaExisteExcursionException e) {
 			ventana.actuarAnteErrorYaExisteExcursion();
 		} catch (NoHayBusesDisponiblesException e) {
