@@ -51,7 +51,7 @@ public class VenderBoleto {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 13));
 		frame.setBounds(100, 100, 453, 330);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Edad Pasajero:");
@@ -122,6 +122,11 @@ public class VenderBoleto {
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(258, 236, 125, 34);
 		frame.getContentPane().add(btnCancelar);
+	}
+
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
 	}
 
 	public void actuarAnteErrorConexion() {

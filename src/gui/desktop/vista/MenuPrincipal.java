@@ -1,16 +1,14 @@
 package gui.desktop.vista;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class MenuPrincipal {
 
@@ -45,54 +43,167 @@ public class MenuPrincipal {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setForeground(new Color(224, 255, 255));
-		frame.setBounds(100, 100, 767, 300);
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnRegistrarExcursion = new JMenu("Registrar Excursion");
-		mnRegistrarExcursion.setBackground(new Color(135, 206, 250));
-		mnRegistrarExcursion.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnRegistrarExcursion.setForeground(new Color(0, 0, 128));
-		menuBar.add(mnRegistrarExcursion);
+		JMenu mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
 		
-		JMenu mnRegistrarBus = new JMenu("Registrar Bus");
-		mnRegistrarBus.setForeground(new Color(0, 0, 128));
-		mnRegistrarBus.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		menuBar.add(mnRegistrarBus);
-		
-		JMenu mnVenderBoleto = new JMenu("Vender Boleto");
-		mnVenderBoleto.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnVenderBoleto.setForeground(new Color(0, 0, 128));
-		menuBar.add(mnVenderBoleto);
-		
-		JMenu mnListarBuses = new JMenu("Listar Buses");
-		mnListarBuses.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnListarBuses.setForeground(new Color(0, 0, 128));
-		menuBar.add(mnListarBuses);
-		
-		JMenu mnListarExcursionesHacia = new JMenu("Listar Excursiones Hacia Destino");
-		mnListarExcursionesHacia.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnListarExcursionesHacia.setForeground(new Color(0, 0, 128));
-		menuBar.add(mnListarExcursionesHacia);
-		
-		JMenu mnListarExcursionesEntre = new JMenu("Listar Excursiones entre Precios");
-		mnListarExcursionesEntre.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnListarExcursionesEntre.setForeground(new Color(0, 0, 128));
-		menuBar.add(mnListarExcursionesEntre);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(460, 130, 180, 45);
-		btnSalir.addActionListener(new ActionListener() {
+		JMenuItem mntmRespaldar = new JMenuItem("Respaldar");
+		mntmRespaldar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mntmRespaldarActionPerformed(e);
 			}
 		});
+		mnArchivo.add(mntmRespaldar);
+		
+		JMenuItem mntmRecuperar = new JMenuItem("Recuperar");
+		mntmRecuperar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmRecuperarActionPerformed(e);
+			}
+		});
+		mnArchivo.add(mntmRecuperar);
+		
+		JMenu mnAltas = new JMenu("Altas");
+		menuBar.add(mnAltas);
+		
+		JMenuItem mntmRegistrarBus = new JMenuItem("Registrar Bus");
+		mntmRegistrarBus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmRegistrarBusActionPerformed(e);
+			}
+		});
+		mnAltas.add(mntmRegistrarBus);
+		
+		JMenuItem mntmResgistrarExcursion = new JMenuItem("Resgistrar Excursi\u00F3n");
+		mntmResgistrarExcursion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmResgistrarExcursionActionPerformed(e);
+			}
+		});
+		mnAltas.add(mntmResgistrarExcursion);
+		
+		JMenuItem mntmVenderBoleto = new JMenuItem("Vender Boleto");
+		mntmVenderBoleto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmVenderBoletoActionPerformed(e);
+			}
+		});
+		mnAltas.add(mntmVenderBoleto);
+		
+		JMenu mnModificaciones = new JMenu("Modificaciones");
+		menuBar.add(mnModificaciones);
+		
+		JMenuItem mntmReasignarExcursion = new JMenuItem("Reasignar Excursi\u00F3n");
+		mntmReasignarExcursion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmReasignarExcursionActionPerformed(e);
+			}
+		});
+		mnModificaciones.add(mntmReasignarExcursion);
+		
+		JMenu mnListadosYConsultas = new JMenu("Listados y Consultas");
+		menuBar.add(mnListadosYConsultas);
+		
+		JMenuItem mntmBuses = new JMenuItem("Buses");
+		mntmBuses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmBusesActionPerformed(e);
+			}
+		});
+		mnListadosYConsultas.add(mntmBuses);
+		
+		JMenuItem mntmRecaudacionExcursion = new JMenuItem("Recaudaci\u00F3n Excursi\u00F3n");
+		mntmRecaudacionExcursion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmRecaudacionExcursionActionPerformed(e);
+			}
+		});
+		mnListadosYConsultas.add(mntmRecaudacionExcursion);
+		
+		JMenuItem mntmBoletosExcursion = new JMenuItem("Boletos de una Excursi\u00F3n");
+		mntmBoletosExcursion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmBoletosExcursionActionPerformed(e);
+			}
+		});
+		mnListadosYConsultas.add(mntmBoletosExcursion);
+		
+		JMenuItem mntmExcursionesHaciaDestino = new JMenuItem("Excursiones hacia un Destino");
+		mntmExcursionesHaciaDestino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmExcursionesHaciaDestinoActionPerformed(e);
+			}
+		});
+		mnListadosYConsultas.add(mntmExcursionesHaciaDestino);
+		
+		JMenuItem mntmExcursionesEntrePrecios = new JMenuItem("Excursiones entre Precios");
+		mntmExcursionesEntrePrecios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmExcursionesEntrePreciosActionPerformed(e);
+			}
+		});
+		mnListadosYConsultas.add(mntmExcursionesEntrePrecios);
 		frame.getContentPane().setLayout(null);
-		btnSalir.setBackground(new Color(192, 192, 192));
-		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnSalir.setForeground(new Color(220, 20, 60));
-		frame.getContentPane().add(btnSalir);
 	}
 
+	private void mntmRespaldarActionPerformed(ActionEvent e) {
+		RespaldarDatos ventana = new RespaldarDatos();
+		ventana.setVisible(true);
+	}
+	
+	private void mntmRecuperarActionPerformed(ActionEvent e) {
+		RecuperarDatos ventana = new RecuperarDatos();
+		ventana.setVisible(true);
+	}
+
+	private void mntmRegistrarBusActionPerformed(ActionEvent e) {
+		RegistrarBus ventana = new RegistrarBus();
+		ventana.setVisible(true);
+	}
+
+	private void mntmResgistrarExcursionActionPerformed(ActionEvent e) {
+		RegistrarExcursion ventana = new RegistrarExcursion();
+		ventana.setVisible(true);
+	}
+
+	private void mntmVenderBoletoActionPerformed(ActionEvent e) {
+		VenderBoleto ventana = new VenderBoleto();
+		ventana.setVisible(true);
+	}
+
+	private void mntmReasignarExcursionActionPerformed(ActionEvent e) {
+		ReasignarExcursion ventana = new ReasignarExcursion();
+		ventana.setVisible(true);
+	}
+
+	private void mntmBusesActionPerformed(ActionEvent e) {
+		ListarBuses ventana = new ListarBuses();
+		ventana.setVisible(true);
+	}
+
+	private void mntmRecaudacionExcursionActionPerformed(ActionEvent e) {
+		RecaudacionExcursion ventana = new RecaudacionExcursion();
+		ventana.setVisible(true);
+	}
+
+	private void mntmBoletosExcursionActionPerformed(ActionEvent e) {
+		ListarBoletosExcursion ventana = new ListarBoletosExcursion();
+		ventana.setVisible(true);
+	}
+
+	private void mntmExcursionesHaciaDestinoActionPerformed(ActionEvent e) {
+		ListarExcursionesHacia ventana = new ListarExcursionesHacia();
+		ventana.setVisible(true);
+	}
+
+	private void mntmExcursionesEntrePreciosActionPerformed(ActionEvent e) {
+		ListarExcursionesEntrePrecios ventana = new ListarExcursionesEntrePrecios();
+		ventana.setVisible(true);
+	}
+	
 }

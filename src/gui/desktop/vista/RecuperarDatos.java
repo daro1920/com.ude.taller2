@@ -37,7 +37,12 @@ public class RecuperarDatos {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
 	}
 
 	public void actuarAnteErrorConexion() {

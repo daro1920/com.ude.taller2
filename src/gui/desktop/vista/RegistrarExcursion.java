@@ -50,7 +50,7 @@ public class RegistrarExcursion {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 14));
 		frame.setBounds(100, 100, 482, 335);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
@@ -127,6 +127,11 @@ public class RegistrarExcursion {
 		frame.getContentPane().add(btnCancelar);
 	}
 
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
+	}
+
 	public void actuarAnteErrorConexion() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("No implementado, aun");
@@ -151,4 +156,5 @@ public class RegistrarExcursion {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("No implementado, aun");
 	}
+	
 }

@@ -1,18 +1,18 @@
 package gui.desktop.vista;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JList;
-import javax.swing.JButton;
-import java.awt.Color;
 import javax.swing.JTextField;
 
 public class RecaudacionExcursion {
 
-	private JFrame frmRecaudacionExcursion;
+	private JFrame frame;
 	private JTextField textField;
 
 	/**
@@ -23,7 +23,7 @@ public class RecaudacionExcursion {
 			public void run() {
 				try {
 					RecaudacionExcursion window = new RecaudacionExcursion();
-					window.frmRecaudacionExcursion.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,42 +42,47 @@ public class RecaudacionExcursion {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRecaudacionExcursion = new JFrame();
-		frmRecaudacionExcursion.setTitle("Recaudacion Excursion");
-		frmRecaudacionExcursion.setBounds(100, 100, 450, 243);
-		frmRecaudacionExcursion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRecaudacionExcursion.getContentPane().setLayout(null);
+		frame = new JFrame();
+		frame.setTitle("Recaudacion Excursion");
+		frame.setBounds(100, 100, 450, 243);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		JLabel lblSeleccioneLaExcursion = new JLabel("Seleccione la excursion:");
 		lblSeleccioneLaExcursion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblSeleccioneLaExcursion.setBounds(12, 13, 172, 16);
-		frmRecaudacionExcursion.getContentPane().add(lblSeleccioneLaExcursion);
+		frame.getContentPane().add(lblSeleccioneLaExcursion);
 		
 		JList list = new JList();
 		list.setBounds(22, 42, 398, 30);
-		frmRecaudacionExcursion.getContentPane().add(list);
+		frame.getContentPane().add(list);
 		
 		JButton btnCalcularRecaudacion = new JButton("Calcular Recaudacion");
 		btnCalcularRecaudacion.setForeground(new Color(0, 0, 128));
 		btnCalcularRecaudacion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCalcularRecaudacion.setBounds(22, 163, 172, 25);
-		frmRecaudacionExcursion.getContentPane().add(btnCalcularRecaudacion);
+		frame.getContentPane().add(btnCalcularRecaudacion);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCancelar.setBounds(248, 163, 172, 25);
-		frmRecaudacionExcursion.getContentPane().add(btnCancelar);
+		frame.getContentPane().add(btnCancelar);
 		
 		JLabel lblRecaudacion = new JLabel("Recaudacion:");
 		lblRecaudacion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblRecaudacion.setBounds(12, 96, 113, 16);
-		frmRecaudacionExcursion.getContentPane().add(lblRecaudacion);
+		frame.getContentPane().add(lblRecaudacion);
 		
 		textField = new JTextField();
 		textField.setBounds(104, 96, 116, 22);
-		frmRecaudacionExcursion.getContentPane().add(textField);
+		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+	}
+
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
 	}
 
 	public void actuarAnteErrorConexion() {

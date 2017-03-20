@@ -46,7 +46,7 @@ public class RegistrarBus {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblMatricula = new JLabel("Matricula:");
@@ -98,6 +98,11 @@ public class RegistrarBus {
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(201, 216, 101, 25);
 		frame.getContentPane().add(btnCancelar);
+	}
+
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
 	}
 
 	public void actuarAnteErrorConexion() {

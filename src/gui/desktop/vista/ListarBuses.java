@@ -1,19 +1,19 @@
 package gui.desktop.vista;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JList;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ListarBuses {
 
-	private JFrame frmListarBuses;
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -23,7 +23,7 @@ public class ListarBuses {
 			public void run() {
 				try {
 					ListarBuses window = new ListarBuses();
-					window.frmListarBuses.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,16 +42,16 @@ public class ListarBuses {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmListarBuses = new JFrame();
-		frmListarBuses.setTitle("Listar Buses");
-		frmListarBuses.setBounds(100, 100, 581, 223);
-		frmListarBuses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmListarBuses.getContentPane().setLayout(null);
+		frame = new JFrame();
+		frame.setTitle("Listar Buses");
+		frame.setBounds(100, 100, 581, 223);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		JLabel lblListaDeBuses = new JLabel("Listado de Buses: ");
 		lblListaDeBuses.setBounds(12, 13, 122, 16);
 		lblListaDeBuses.setFont(new Font("Tahoma", Font.BOLD, 13));
-		frmListarBuses.getContentPane().add(lblListaDeBuses);
+		frame.getContentPane().add(lblListaDeBuses);
 		
 		JButton btnListar = new JButton("Listar Buses");
 		btnListar.addActionListener(new ActionListener() {
@@ -61,23 +61,28 @@ public class ListarBuses {
 		btnListar.setBounds(12, 123, 137, 25);
 		btnListar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnListar.setForeground(new Color(0, 0, 128));
-		frmListarBuses.getContentPane().add(btnListar);
+		frame.getContentPane().add(btnListar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(418, 123, 118, 25);
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		frmListarBuses.getContentPane().add(btnCancelar);
+		frame.getContentPane().add(btnCancelar);
 		
 		JList list = new JList();
 		list.setBounds(133, 12, 403, 33);
-		frmListarBuses.getContentPane().add(list);
+		frame.getContentPane().add(list);
 		
 		JButton btnListarExcursiones = new JButton("Listar Excursiones ");
 		btnListarExcursiones.setForeground(new Color(0, 0, 128));
 		btnListarExcursiones.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnListarExcursiones.setBounds(208, 123, 167, 25);
-		frmListarBuses.getContentPane().add(btnListarExcursiones);
+		frame.getContentPane().add(btnListarExcursiones);
+	}
+
+	/* Indico si deseo que la ventana sea visible o no */
+	public void setVisible (boolean visible) {
+		frame.setVisible(visible);
 	}
 
 }
