@@ -23,7 +23,7 @@ public class ControladorVenderBoleto {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
 			ventana.actuarAnteErrorConfiguracionInicial();
 		}
@@ -42,7 +42,7 @@ public class ControladorVenderBoleto {
 			fachada.venderBoleto(voBoleto);
 			ventana.notificarRegistroExitoso();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexionInicial();
+			ventana.actuarAnteErrorConexionMetodo();
 		} catch (NoExisteExcursionException e) {
 			ventana.actuarAnteNoExisteExcursion();
 		} catch (NoHayAsientosDisponiblesException e) {

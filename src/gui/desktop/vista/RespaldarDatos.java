@@ -17,7 +17,7 @@ public class RespaldarDatos {
 	private ControladorRespaldarDatos controlador;
 	private boolean inicioFallido;
 
-	private JFrame frame;
+	public JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -87,11 +87,43 @@ public class RespaldarDatos {
 	public void setVisible (boolean visible) {
 		frame.setVisible(visible);
 	}
+	
+	public void notificarRegistroExitoso() {
+		JOptionPane.showMessageDialog(frame,
+            "Se ha respaldado con exito.",
+            "Respaldo exitoso",
+            JOptionPane.INFORMATION_MESSAGE);
+	}
 
+
+	public void actuarAnteErrorConexion() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void actuarAnteErrorConfiguracionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible cargar la configuración.",
+                "Error de configuración",
+                JOptionPane.ERROR_MESSAGE);
+	}
+	
 	public void actuarAnteErrorConexionInicial() {
 		inicioFallido = true;
 		JOptionPane.showMessageDialog(frame,
                 "No fue posible conectarse al servidor.",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorConexionMetodo() {
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.\n"
+                + "Intentelo más tarde",
                 "Error de conexión",
                 JOptionPane.ERROR_MESSAGE);
 	}

@@ -19,9 +19,9 @@ public class ControladorRespaldarDatos {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	
@@ -29,7 +29,7 @@ public class ControladorRespaldarDatos {
 		try {
 			fachada.respaldar();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionMetodo();
 		} catch (PersistenciaException e) {
 			ventana.actuarAnteErrorPersistencia();
 		} catch (ConfiguracionException e) {

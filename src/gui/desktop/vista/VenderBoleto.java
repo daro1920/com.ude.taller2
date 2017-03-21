@@ -59,8 +59,8 @@ public class VenderBoleto {
 
 	public void notificarRegistroExitoso() {
 		JOptionPane.showMessageDialog(frame,
-            "Bus registrado con exito.",
-            "Registro exitoso",
+            "Venta de boleto exitosa.",
+            "Venta exitosa",
             JOptionPane.INFORMATION_MESSAGE);
 	}
 
@@ -95,6 +95,13 @@ public class VenderBoleto {
                 JOptionPane.ERROR_MESSAGE);
 	}
 
+	public void actuarAnteErrorConexionMetodo() {
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.\n"
+                + "Intentelo más tarde",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
 	public void actuarAnteNoExisteExcursion() {
 		JOptionPane.showMessageDialog(frame,
                 "No existe una excursion con ese codigo.",

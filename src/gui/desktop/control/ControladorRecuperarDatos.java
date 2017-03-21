@@ -19,7 +19,7 @@ public class ControladorRecuperarDatos {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
 			ventana.actuarAnteErrorConfiguracion();
 		}
@@ -28,8 +28,9 @@ public class ControladorRecuperarDatos {
 	public void recuperarDatos() {
 		try {
 			fachada.recuperar();
+			ventana.notificarRegistroExitoso();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionMetodo();
 		} catch (PersistenciaException e) {
 			ventana.actuarAnteErrorPersistencia();
 		} catch (ConfiguracionException e) {
