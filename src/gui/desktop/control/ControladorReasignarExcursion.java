@@ -20,17 +20,18 @@ public class ControladorReasignarExcursion {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	
 	public void reasignarExcursion(String codigo) {
 		try {
 			fachada.reasignarExcursion(codigo);
+			ventana.notificarReasignacionExitosa();
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionMetodo();
 		} catch (NoExisteExcursionException e) {
 			ventana.actuarAnteErrorNoExisteExcursion();
 		} catch (NoHayBusesDisponiblesException e) {
