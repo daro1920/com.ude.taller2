@@ -1,28 +1,19 @@
 package gui.desktop.vista;
 
-import gui.desktop.control.ControladorRegistrarBus;
 import gui.desktop.control.ControladorVenderBoleto;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-
-import javax.swing.JTextField;
-
-import java.awt.List;
-import java.awt.TextField;
-import java.awt.Button;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JButton;
-
-import java.awt.Color;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 public class VenderBoleto {
 	
@@ -35,7 +26,6 @@ public class VenderBoleto {
 	private JTextField textNroExcursion;
 	private JSpinner spinnerEdadPasajero;
 	private JSpinner spinnerDescuento;
-	private JSpinner spinnerBoleto;
 
 	/**
 	 * Launch the application.
@@ -128,7 +118,7 @@ public class VenderBoleto {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 13));
-		frame.setBounds(100, 100, 453, 330);
+		frame.setBounds(100, 100, 453, 314);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -154,13 +144,8 @@ public class VenderBoleto {
 		
 		JLabel lblPrecio = new JLabel("Descuento:");
 		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPrecio.setBounds(12, 193, 85, 16);
+		lblPrecio.setBounds(12, 149, 85, 16);
 		frame.getContentPane().add(lblPrecio);
-		
-		JLabel lblNroBoleto = new JLabel("Nro. Boleto:");
-		lblNroBoleto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNroBoleto.setBounds(12, 149, 76, 16);
-		frame.getContentPane().add(lblNroBoleto);
 		
 		textProcedencia = new JTextField();
 		textProcedencia.setBounds(127, 40, 116, 22);
@@ -180,7 +165,7 @@ public class VenderBoleto {
 		});
 		btnNewButton.setForeground(new Color(0, 0, 128));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(50, 236, 125, 34);
+		btnNewButton.setBounds(50, 210, 125, 34);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -191,7 +176,7 @@ public class VenderBoleto {
 		});
 		btnCancelar.setForeground(new Color(0, 0, 128));
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnCancelar.setBounds(258, 236, 125, 34);
+		btnCancelar.setBounds(258, 210, 125, 34);
 		frame.getContentPane().add(btnCancelar);
 		
 		textNroExcursion = new JTextField();
@@ -203,12 +188,8 @@ public class VenderBoleto {
 		spinnerEdadPasajero.setBounds(127, 11, 48, 22);
 		frame.getContentPane().add(spinnerEdadPasajero);
 		
-		spinnerBoleto = new JSpinner();
-		spinnerBoleto.setBounds(127, 147, 48, 22);
-		frame.getContentPane().add(spinnerBoleto);
-		
 		spinnerDescuento = new JSpinner();
-		spinnerDescuento.setBounds(127, 191, 48, 22);
+		spinnerDescuento.setBounds(127, 147, 48, 22);
 		frame.getContentPane().add(spinnerDescuento);
 	}
 	
@@ -224,9 +205,8 @@ public class VenderBoleto {
 			String celular = textCelular.getText();
 			String nroExcursion = textNroExcursion.getText();
 			int descuento = (Integer) spinnerDescuento.getValue();
-			int nroBoleto = (Integer) spinnerBoleto.getValue();
 			
-			controlador.venderBoleto(edad,procedencia,celular,nroExcursion,descuento,nroBoleto);
+			controlador.venderBoleto(edad,procedencia,celular,nroExcursion,descuento);
 		} else {
 			JOptionPane.showMessageDialog(frame,
                     "Los campos marcados con asterisco (*) son obligatorios.",
@@ -237,7 +217,11 @@ public class VenderBoleto {
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
-		frame.setVisible(visible);
+		if (inicioFallido) {
+			frame.dispose();
+		} else {
+			frame.setVisible(visible);
+		}
 	}
 	
 	// #########################################################################
@@ -249,6 +233,6 @@ public class VenderBoleto {
 		boolean procedencia = !textProcedencia.getText().trim().isEmpty();
 		boolean celular = !textCelular.getText().trim().isEmpty();
 		// No es posible dejar vacio el spinner, por lo que no se verifica
-		return procedencia && celular;
+		return procedencia && celular && nroExcursion;
 	}
 }

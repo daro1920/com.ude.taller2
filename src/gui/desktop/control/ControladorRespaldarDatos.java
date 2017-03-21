@@ -28,6 +28,7 @@ public class ControladorRespaldarDatos {
 	public void respaldarDatos() {
 		try {
 			fachada.respaldar();
+			ventana.notificarRegistroExitoso();
 		} catch (RemoteException e) {
 			ventana.actuarAnteErrorConexionMetodo();
 		} catch (PersistenciaException e) {

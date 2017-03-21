@@ -30,7 +30,7 @@ public class ControladorVenderBoleto {
 	}
 	
 	public void venderBoleto(int edad,String procedencia,String celular,
-			String nroExcursion,int descuento,int nroBoleto) {
+			String nroExcursion,int descuento) {
 		
 		VOBoletoEntrada voBoleto;
 		if(descuento > 0) {

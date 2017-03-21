@@ -87,7 +87,11 @@ public class RecuperarDatos {
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
-		frame.setVisible(visible);
+		if (inicioFallido) {
+			frame.dispose();
+		} else {
+			frame.setVisible(visible);
+		}
 	}
 	
 	public void notificarRegistroExitoso() {
