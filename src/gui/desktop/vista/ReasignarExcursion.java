@@ -1,96 +1,144 @@
 package gui.desktop.vista;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import gui.desktop.control.ControladorReasignarExcursion;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ReasignarExcursion {
+	
+	private ControladorReasignarExcursion controlador;
+	private boolean inicioFallido;
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReasignarExcursion window = new ReasignarExcursion();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTextField textFieldCodigoExcursion;
 
 	/**
 	 * Create the application.
 	 */
 	public ReasignarExcursion() {
 		initialize();
+		inicioFallido = false;
+		controlador = new ControladorReasignarExcursion(this);
 	}
+	
+    // #########################################################################
+    // # METODOS PUBLICOS                                                      #
+    // #########################################################################
+
+	public void notificarReasignacionExitosa() {
+		JOptionPane.showMessageDialog(frame,
+	            "Excursión reasignada con éxito.",
+	            "Reasignación exitosa",
+	            JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void actuarAnteErrorConexionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorConfiguracionInicial() {
+		inicioFallido = true;
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible cargar la configuración.",
+                "Error de configuración",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorConexionMetodo() {
+		JOptionPane.showMessageDialog(frame,
+                "No fue posible conectarse al servidor.\n"
+                + "Intentelo más tarde",
+                "Error de conexión",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorNoExisteExcursion() {
+		JOptionPane.showMessageDialog(frame,
+                "No existe una excursión con el código dado.",
+                "Excursión inexistente",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void actuarAnteErrorNoHayBusesDisponibles() {
+		JOptionPane.showMessageDialog(frame,
+                "No hay buses disponibles para la excursión dada.",
+                "Sin buses disponibles",
+                JOptionPane.ERROR_MESSAGE);
+	}
+
+	// #########################################################################
+    // # INITIALIZE Y SET VISIBLE                                              #
+    // #########################################################################
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("Reasignar Excursion");
-		frame.setBounds(100, 100, 542, 234);
+		frame.setResizable(false);
+		frame.setTitle("Reasignar Excursi\u00F3n");
+		frame.setBounds(100, 100, 350, 130);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblSeleccionarLaExcursion = new JLabel("Seleccione la Excursion a reasignar:");
-		lblSeleccionarLaExcursion.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblSeleccionarLaExcursion.setBounds(12, 13, 245, 16);
-		frame.getContentPane().add(lblSeleccionarLaExcursion);
-		
-		JList list = new JList();
-		list.setBounds(12, 30, 485, 31);
-		frame.getContentPane().add(list);
-		
 		JButton btnReasignar = new JButton("Reasignar");
-		btnReasignar.setForeground(new Color(0, 0, 128));
-		btnReasignar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnReasignar.setBounds(12, 101, 97, 25);
+		btnReasignar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnReasignarActionPerformed(e);
+			}
+		});
+		btnReasignar.setBounds(12, 57, 97, 25);
 		frame.getContentPane().add(btnReasignar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setForeground(new Color(0, 0, 128));
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnCancelar.setBounds(383, 88, 97, 25);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnCancelarActionPerformed(e);
+			}
+		});
+		btnCancelar.setBounds(235, 57, 97, 25);
 		frame.getContentPane().add(btnCancelar);
+		
+		JLabel lblCodigoExcursion = new JLabel("C\u00F3digo Excursi\u00F3n");
+		lblCodigoExcursion.setBounds(12, 13, 97, 16);
+		frame.getContentPane().add(lblCodigoExcursion);
+		
+		textFieldCodigoExcursion = new JTextField();
+		textFieldCodigoExcursion.setBounds(121, 10, 211, 22);
+		frame.getContentPane().add(textFieldCodigoExcursion);
+		textFieldCodigoExcursion.setColumns(10);
 	}
 
 	/* Indico si deseo que la ventana sea visible o no */
 	public void setVisible (boolean visible) {
-		frame.setVisible(visible);
+		if (inicioFallido) {
+			frame.dispose();
+		} else {
+			frame.setVisible(visible);
+		}
 	}
 
-	public void actuarAnteErrorConexion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
+	// #########################################################################
+    // # EVENT HANDLERS                                                        #
+    // #########################################################################
+
+	protected void btnReasignarActionPerformed(ActionEvent e) {
+		String codigo = textFieldCodigoExcursion.getText();
+		controlador.reasignarExcursion(codigo);
 	}
 
-	public void actuarAnteErrorConfiguracion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
-	}
-
-	public void actuarAnteErrorNoExisteExcursion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
-	}
-
-	public void actuarAnteErrorNoHayBusesDisponibles() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("No implementado, aun");
+	private void btnCancelarActionPerformed(ActionEvent e) {
+    	frame.dispose();
 	}
 
 }

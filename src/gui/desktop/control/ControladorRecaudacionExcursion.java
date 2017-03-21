@@ -1,6 +1,5 @@
 package gui.desktop.control;
 
-import gui.desktop.excepciones.AccionNoConcretadaException;
 import gui.desktop.vista.RecaudacionExcursion;
 
 import java.math.BigDecimal;
@@ -22,21 +21,21 @@ public class ControladorRecaudacionExcursion {
 		try {
 			fachada = FachadaWraper.getInstance().getFachada();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			ventana.actuarAnteErrorConexion();
+			ventana.actuarAnteErrorConexionInicial();
 		} catch (ConfiguracionException e) {
-			ventana.actuarAnteErrorConfiguracion();
+			ventana.actuarAnteErrorConfiguracionInicial();
 		}
 	}
 	
-	public BigDecimal recaudacionExcursion(String codigo) throws AccionNoConcretadaException {
+	public BigDecimal recaudacionExcursion(String codigo) {
 		try {
 			return fachada.recaudacionExcursion(codigo);
 		} catch (RemoteException e) {
-			ventana.actuarAnteErrorConexion();
-			throw new AccionNoConcretadaException("No se pudo concretar la accion");
+			ventana.actuarAnteErrorConexionMetodo();
+			return BigDecimal.ZERO;
 		} catch (NoExisteExcursionException e) {
 			ventana.actuarAnteErrorNoExisteExcursion();
-			throw new AccionNoConcretadaException("No se pudo concretar la accion");
+			return BigDecimal.ZERO;
 		}
 	}
 

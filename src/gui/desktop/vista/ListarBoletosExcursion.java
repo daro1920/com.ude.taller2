@@ -39,6 +39,7 @@ public class ListarBoletosExcursion {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Listar Boletos Vendidos para una Excursion");
