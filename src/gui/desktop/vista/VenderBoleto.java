@@ -27,21 +27,7 @@ public class VenderBoleto {
 	private JSpinner spinnerEdadPasajero;
 	private JSpinner spinnerDescuento;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VenderBoleto window = new VenderBoleto();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	// #########################################################################
     // # METODOS PUBLICOS                                                      #

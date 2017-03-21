@@ -20,26 +20,12 @@ public class RespaldarDatos {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RespaldarDatos window = new RespaldarDatos();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public RespaldarDatos() {
 		initialize();
+		inicioFallido = false;
+		this.controlador = new ControladorRespaldarDatos(this);
 	}
 
 	/**

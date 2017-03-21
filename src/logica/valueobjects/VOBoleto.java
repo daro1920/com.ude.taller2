@@ -1,8 +1,14 @@
 package logica.valueobjects;
 
-public abstract class VOBoleto {
+import java.io.Serializable;
 
-    private int edad;
+public abstract class VOBoleto implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int edad;
     private String procedencia;
     private String celular;
 

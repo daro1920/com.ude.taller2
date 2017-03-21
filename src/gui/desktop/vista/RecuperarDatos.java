@@ -21,27 +21,13 @@ public class RecuperarDatos {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RespaldarDatos window = new RespaldarDatos();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
 	public RecuperarDatos() {
 		initialize();
+		inicioFallido = false;
+		this.controlador = new ControladorRecuperarDatos(this);
 	}
 
 	/**
